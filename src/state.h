@@ -16,11 +16,11 @@ namespace TetraBlocks {
     class State {
     public:
         State() {};
-        virtual State* nextState();
-        virtual bool init();
-        virtual SDL_Rect * display(SDL_Surface * screen);
-        virtual bool update(Game * game);
-        virtual void handle(SDL_Event &event);
+        virtual State* nextState() { return 0; };
+        virtual bool init() { return true; };
+        virtual SDL_Rect * display(SDL_Surface * screen) {return 0;};
+        virtual bool update(Game * game){ return true; };
+        virtual void handle(SDL_Event &event) {};
         virtual ~State(){};
     };
 };
