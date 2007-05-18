@@ -10,12 +10,14 @@
 #define TB_STATE_H
 #include<SDL/SDL.h>
 
+
 namespace TetraBlocks {
+    class Game;
     class State {
     public:
         State* nextState();
         bool init();
-        SDL_Rect [] display(SDL_Surface * screen);
+        SDL_Rect * display(SDL_Surface * screen);
         bool update(Game * game);
         void handle(SDL_Event &event);
     };

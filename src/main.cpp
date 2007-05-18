@@ -10,7 +10,7 @@
 
 #include<SDL/SDL.h>
 
-#include<state.h>
+#include "state.h"
 
 namespace TetraBlocks {
     class Game {
@@ -20,7 +20,7 @@ namespace TetraBlocks {
         State * currentState;
 
     public:
-        void Game() {
+        Game() {
             if(SDL_Init(SDL_INIT_VIDEO) != 0) {
                 std::cout<<"Can't initialize SDL"<<SDL_GetError()<<std::endl;
                 exit(1);
@@ -42,7 +42,7 @@ namespace TetraBlocks {
             r.h = screen->h;
             SDL_FillRect(screen, &r, SDL_MapRGB(screen->format, 0, 0, 0));
 
-            currentState = new MenuState();
+            currentState = new State();//new MenuState();
             currentState->init();
             
             gameLoop();
@@ -61,7 +61,7 @@ namespace TetraBlocks {
 
                 currentState->update(this);
                 SDL_Rect * updates = currentState->display(screen);
-                SDL_Flip();
+                SDL_Flip(screen);
             }
         }
     };
