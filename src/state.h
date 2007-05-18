@@ -15,11 +15,13 @@ namespace TetraBlocks {
     class Game;
     class State {
     public:
-        State* nextState();
-        bool init();
-        SDL_Rect * display(SDL_Surface * screen);
-        bool update(Game * game);
-        void handle(SDL_Event &event);
+        State() {};
+        virtual State* nextState();
+        virtual bool init();
+        virtual SDL_Rect * display(SDL_Surface * screen);
+        virtual bool update(Game * game);
+        virtual void handle(SDL_Event &event);
+        virtual ~State(){};
     };
 };
 

@@ -11,6 +11,7 @@
 #include<SDL/SDL.h>
 
 #include "state.h"
+#include "gamegrid.h"
 
 namespace TetraBlocks {
     class Game {
@@ -42,7 +43,7 @@ namespace TetraBlocks {
             r.h = screen->h;
             SDL_FillRect(screen, &r, SDL_MapRGB(screen->format, 0, 0, 0));
 
-            currentState = new State();//new MenuState();
+            currentState = new GameGrid();
             currentState->init();
             
             gameLoop();
