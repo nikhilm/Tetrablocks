@@ -20,7 +20,7 @@ namespace TetraBlocks {
         enum {WIDTH = 20, HEIGHT = 20};
         int x, y;
 
-        Block(SDL_Surface * img) { image = img; };
+        Block(SDL_Surface * img) { image = img; x = y = 0; };
         /**
          * Draws the block.
          * offsetX and offsetY should be absolute coordinates.

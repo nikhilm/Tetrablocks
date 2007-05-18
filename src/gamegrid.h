@@ -21,6 +21,8 @@ namespace TetraBlocks {
         SDL_Rect * display(SDL_Surface * screen);
         bool update(Game * game);
         void handle(SDL_Event &event);
+
+        Block * block;
     };
 };
         
