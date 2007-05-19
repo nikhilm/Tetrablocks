@@ -5,6 +5,7 @@
  * (C) Nikhil Marathe <nsm.nikhil@gmail.com>
  * Licensed under the GNU GPL
  */
+#include<iostream>
 
 #include<SDL/SDL_image.h>
 #include "gamegrid.h"
@@ -13,14 +14,30 @@ namespace TetraBlocks {
     State* GameGrid::nextState() {
         return 0;
     }
-    bool GameGrid::init() { 
-        block = new Block(IMG_Load("../images/block_red.png"));
+    bool GameGrid::init() {
+        for(int i = 0; i < GRID_HEIGHT; ++i) {
+            for(int j = 0; j < GRID_WIDTH; ++j) {
+                grid[i][j] = NULL;
+            }
+        }
+        // TODO:Add real logic this is test code
+        int coords[][2] = {{2,5}, {5,6}, {9, 3}};
+        for(int i = 0; i < 3; i++) {
+            grid[coords[i][0]][coords[i][1]] = new Block(IMG_Load("../images/block_blue.png"));
+            grid[coords[i][0]][coords[i][1]]->x = coords[i][0];
+            grid[coords[i][0]][coords[i][1]]->y = coords[i][1];
+        }
+        
         return true;
     }
     SDL_Rect * GameGrid::display(SDL_Surface * screen) { 
         drawGridOutline(screen);
-
-        block->display(LEFT, TOP, screen);
+        for(int i = 0; i < GRID_HEIGHT; ++i) {
+            for(int j = 0; j < GRID_WIDTH; ++j) {
+                if(grid[i][j] != NULL)
+                    grid[i][j]->display(LEFT, TOP, screen);
+            }
+        }
         return 0;
     }
 

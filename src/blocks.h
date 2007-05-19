@@ -19,6 +19,9 @@ namespace TetraBlocks {
     public:
         enum {WIDTH = 20, HEIGHT = 20};
         int x, y;
+        
+        //NOTE: DO NOT call this, only used for init
+        Block() { image = NULL; }
 
         Block(SDL_Surface * img) { image = img; x = y = 0; };
         /**

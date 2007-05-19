@@ -17,7 +17,7 @@ namespace TetraBlocks {
     private:
         enum {TOP=50, LEFT = 200, GRID_WIDTH = 10, GRID_HEIGHT = 20};
 
-        Block grid[GRID_HEIGHT][GRID_WIDTH];
+        Block * grid[GRID_HEIGHT][GRID_WIDTH];
 
         void drawGridOutline(SDL_Surface * screen);
 
