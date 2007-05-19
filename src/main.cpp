@@ -28,7 +28,7 @@ namespace TetraBlocks {
             }
             atexit(SDL_Quit);
 
-            screen = SDL_SetVideoMode(800, 600, 32, SDL_HWSURFACE|SDL_DOUBLEBUF);
+            screen = SDL_SetVideoMode(600, 500, 32, SDL_HWSURFACE|SDL_DOUBLEBUF);
 
             if(screen == NULL) {
                 std::cout<<"Unable to set video mode "<<SDL_GetError()<<std::endl;

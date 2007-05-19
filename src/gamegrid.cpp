@@ -15,17 +15,31 @@ namespace TetraBlocks {
     }
     bool GameGrid::init() { 
         block = new Block(IMG_Load("../images/block_red.png"));
-//        block->x = 5;
-//        block->y = 5;
         return true;
     }
     SDL_Rect * GameGrid::display(SDL_Surface * screen) { 
-        block->display(100, 150, screen);
+        drawGridOutline(screen);
+
+        block->display(LEFT, TOP, screen);
         return 0;
     }
 
     bool GameGrid::update(Game * game) { return true; }
     void GameGrid::handle(SDL_Event &event) {}
-    
+
+    void GameGrid::drawGridOutline(SDL_Surface * screen) {
+        SDL_Rect r;
+        r.x = LEFT-1;
+        r.y = TOP-1;
+        r.w = GRID_WIDTH*Block::WIDTH+2;
+        r.h = GRID_HEIGHT*Block::HEIGHT+2;
+        SDL_FillRect(screen, &r, SDL_MapRGB(screen->format, 255, 255, 255));
+        r.x++;
+        r.y++;
+        r.w-=2;
+        r.h-=2;
+        SDL_FillRect(screen, &r, SDL_MapRGB(screen->format, 0, 0, 0));
+
+    }
 };
 
