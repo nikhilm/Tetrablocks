@@ -20,15 +20,8 @@ namespace TetraBlocks {
                 grid[i][j] = NULL;
             }
         }
-        // TODO:Add real logic this is test code
-        int coords[][2] = {{2,5}, {5,6}, {9, 3}};
-        for(int i = 0; i < 3; i++) {
-            grid[coords[i][0]][coords[i][1]] = new Block(IMG_Load("../images/block_blue.png"));
-            grid[coords[i][0]][coords[i][1]]->x = coords[i][0];
-            grid[coords[i][0]][coords[i][1]]->y = coords[i][1];
-        }
+        currentPiece = Piece::createRandomPiece(START_X, START_Y);
         
-        currentPiece = Piece::createRandomPiece(6, 10);
         return true;
     }
     SDL_Rect * GameGrid::display(SDL_Surface * screen) { 
@@ -43,8 +36,13 @@ namespace TetraBlocks {
         return 0;
     }
 
-    bool GameGrid::update(Game * game) { return true; }
-    void GameGrid::handle(SDL_Event &event) {}
+    bool GameGrid::update(Game * game) { 
+        return true; 
+    }
+    void GameGrid::handle(SDL_Event &event) {
+        if(event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_SPACE)
+            currentPiece = Piece::createRandomPiece(START_X, START_Y);
+    }
 
     void GameGrid::drawGridOutline(SDL_Surface * screen) {
         SDL_Rect r;

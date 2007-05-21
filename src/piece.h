@@ -21,17 +21,17 @@ namespace TetraBlocks {
     class Piece {
         private:
             //height, width in block terms
-            enum { PIECE_SIZE = 4};
+            enum { PIECE_SIZE = 4, NB_PIECES=7};
             
             /**************************************************
              * SHAPES LAYOUT DESCRIPTION BEGINS               *
              * Their are 7 shapes. Each shape has 4 positions.*
              * Each position is represented by a 4x4 array    *
              *************************************************/
-            static int SHAPES[2][4][4][4];
+            static int SHAPES[NB_PIECES][4][4][4];
             
             
-            static SDL_Surface * COLOURS[7];
+            static SDL_Surface * COLOURS[NB_PIECES];
             
             
             Block * layout[PIECE_SIZE][PIECE_SIZE];
@@ -43,9 +43,8 @@ namespace TetraBlocks {
             
         public:
             static  Piece * createRandomPiece(int x, int y) {
-                int index = rand()%2;
-                int subIndex = rand()%4;
-                return new Piece(x, y, SHAPES[index][subIndex], COLOURS[index]);
+                int index = rand()%NB_PIECES;
+                return new Piece(x, y, SHAPES[index][0], COLOURS[index]);
             };
             
             // NOTE: Called only by colours array to load images
