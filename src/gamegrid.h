@@ -11,6 +11,7 @@
 
 #include "state.h"
 #include "blocks.h"
+#include "piece.h"
 
 namespace TetraBlocks {
     class GameGrid : public State {
@@ -20,6 +21,8 @@ namespace TetraBlocks {
         Block * grid[GRID_HEIGHT][GRID_WIDTH];
 
         void drawGridOutline(SDL_Surface * screen);
+
+        Piece * currentPiece;
 
 
     public:

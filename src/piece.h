@@ -28,7 +28,7 @@ namespace TetraBlocks {
              * Their are 7 shapes. Each shape has 4 positions.*
              * Each position is represented by a 4x4 array    *
              *************************************************/
-            static int SHAPES[7][4][4][4];
+            static int SHAPES[2][4][4][4];
             
             
             static SDL_Surface * COLOURS[7];
@@ -37,15 +37,16 @@ namespace TetraBlocks {
             Block * layout[PIECE_SIZE][PIECE_SIZE];
             int x, y;
             
-            Piece(int X, int Y, const int grid[PIECE_SIZE][PIECE_SIZE], SDL_Surface * colour);
+            Piece(int, int, int [PIECE_SIZE][PIECE_SIZE], SDL_Surface * );
             
             void moveDown();
             
         public:
-            static Piece * createRandomPiece(int x, int y) {
+            static  Piece * createRandomPiece(int x, int y) {
                 int index = rand()%2;
                 int subIndex = rand()%4;
-                return new Piece(x, y, SHAPES[index][subIndex], &COLOURS[index]);
+                std::cout<<index<<" "<<subIndex<<std::endl;
+                return new Piece(x, y, SHAPES[index][subIndex], COLOURS[index]);
             };
             
             // NOTE: Called only by colours array to load images

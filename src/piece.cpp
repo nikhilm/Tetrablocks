@@ -1,7 +1,7 @@
 
 #include "piece.h"
 namespace TetraBlocks {
-    Piece::SHAPES = {
+     int Piece::SHAPES[2][4][4][4] = {
         // I shape
         {{{0, 1, 0, 0},
           {0, 1, 0, 0},
@@ -45,7 +45,7 @@ namespace TetraBlocks {
           {0, 0, 0, 0}}}
     };
     
-    Piece::COLOURS [7] = {
+     SDL_Surface * Piece::COLOURS[7] = {
         // I = red
         genImageSurface("red"),
         // J = yellow
@@ -62,7 +62,7 @@ namespace TetraBlocks {
         genImageSurface("orange")
     };
     
-    Piece::Piece(int X, int Y, const int grid[PIECE_SIZE][PIECE_SIZE], SDL_Surface * colour) {
+    Piece::Piece(int X, int Y, int grid[PIECE_SIZE][PIECE_SIZE], SDL_Surface * colour) {
         for(int i = 0; i < PIECE_SIZE; ++i) {
             for(int j = 0; j < PIECE_SIZE; ++j) {
                 layout[i][j] = NULL;
@@ -86,5 +86,6 @@ namespace TetraBlocks {
             }
         }
     };
+
 }
             
