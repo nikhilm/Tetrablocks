@@ -28,7 +28,7 @@ namespace TetraBlocks {
             grid[coords[i][0]][coords[i][1]]->y = coords[i][1];
         }
         
-        currentPiece = createRandomPiece(6, 10);
+        currentPiece = Piece::createRandomPiece(6, 10);
         return true;
     }
     SDL_Rect * GameGrid::display(SDL_Surface * screen) { 
@@ -39,7 +39,7 @@ namespace TetraBlocks {
                     grid[i][j]->display(LEFT, TOP, screen);
             }
         }
-        currentPiece->display(screen);
+        currentPiece->display(LEFT, TOP, screen);
         return 0;
     }
 

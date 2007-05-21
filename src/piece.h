@@ -45,7 +45,6 @@ namespace TetraBlocks {
             static  Piece * createRandomPiece(int x, int y) {
                 int index = rand()%2;
                 int subIndex = rand()%4;
-                std::cout<<index<<" "<<subIndex<<std::endl;
                 return new Piece(x, y, SHAPES[index][subIndex], COLOURS[index]);
             };
             
@@ -58,6 +57,8 @@ namespace TetraBlocks {
                 path += ".png";
                 return IMG_Load(path.c_str());
             }
+
+            void display(int, int, SDL_Surface * );
     }; // class Piece
 }; //namespace TetraBlocks
 #endif

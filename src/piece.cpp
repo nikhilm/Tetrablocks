@@ -85,7 +85,18 @@ namespace TetraBlocks {
                 }
             }
         }
-    };
+    }
 
+    void Piece::display(int offsetX, int offsetY, SDL_Surface * screen) {
+        int drawX = offsetX + x * Block::WIDTH;
+        int drawY = offsetY + y * Block::HEIGHT;
+        for(int i = 0; i < PIECE_SIZE; ++i) {
+            for(int j = 0; j < PIECE_SIZE; ++j) {
+                if(layout[i][j] != NULL) {
+                    layout[i][j]->display(drawX + i, drawY + j, screen);
+                }
+            }
+        }
+    }
 }
             
