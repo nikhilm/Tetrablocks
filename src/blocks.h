@@ -8,6 +8,8 @@
 
 #ifndef TB_BLOCKS_H
 #define TB_BLOCKS_H
+
+#include<iostream>
 #include<SDL/SDL.h>
 
 
@@ -33,6 +35,7 @@ namespace TetraBlocks {
             SDL_Rect r;
             r.x = offsetX + x*WIDTH;
             r.y = offsetY + y*HEIGHT;
+            //std::cout<<"Drawing at ("<<r.x<<", "<<r.y<<")\n";
             SDL_BlitSurface(image, NULL, screen, &r);
         }
     };

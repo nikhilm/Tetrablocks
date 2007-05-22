@@ -40,8 +40,17 @@ namespace TetraBlocks {
         return true; 
     }
     void GameGrid::handle(SDL_Event &event) {
-        if(event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_SPACE)
-            currentPiece = Piece::createRandomPiece(START_X, START_Y);
+        if(event.type == SDL_KEYDOWN) {
+           switch(event.key.keysym.sym) {
+               case SDLK_SPACE:
+                   currentPiece = Piece::createRandomPiece(START_X, START_Y);
+                   break;
+               case SDLK_DOWN:
+                   currentPiece->moveDown();
+                   break;
+               default:break;
+           }
+        }
     }
 
     void GameGrid::drawGridOutline(SDL_Surface * screen) {

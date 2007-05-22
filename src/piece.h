@@ -39,8 +39,6 @@ namespace TetraBlocks {
             
             Piece(int, int, int [PIECE_SIZE][PIECE_SIZE], SDL_Surface * );
             
-            void moveDown();
-            
         public:
             static  Piece * createRandomPiece(int x, int y) {
                 int index = rand()%NB_PIECES;
@@ -58,6 +56,8 @@ namespace TetraBlocks {
             }
 
             void display(int, int, SDL_Surface * );
+            
+            void moveDown();
     }; // class Piece
 }; //namespace TetraBlocks
 #endif

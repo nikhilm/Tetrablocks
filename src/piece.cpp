@@ -53,7 +53,12 @@ namespace TetraBlocks {
           {0, 0, 0, 0}}},
 
         // L shape
-        {{{0, 0, 0, 0},
+        {{{1, 1, 1, 0},
+          {1, 0, 0, 0},
+          {0, 0, 0, 0},
+          {0, 0, 0, 0}},
+
+         {{0, 0, 0, 0},
           {0, 0, 0, 0},
           {0, 0, 0, 1},
           {0, 1, 1, 1}},
@@ -66,11 +71,6 @@ namespace TetraBlocks {
          {{0, 1, 1, 0},
           {0, 0, 1, 0},
           {0, 0, 1, 0},
-          {0, 0, 0, 0}},
-
-         {{0, 0, 0, 0},
-          {1, 1, 1, 0},
-          {1, 0, 0, 0},
           {0, 0, 0, 0}}},
 
         // O shape
@@ -178,6 +178,7 @@ namespace TetraBlocks {
     Piece::Piece(int X, int Y, int grid[PIECE_SIZE][PIECE_SIZE], SDL_Surface * colour) {
         for(int i = 0; i < PIECE_SIZE; ++i) {
             for(int j = 0; j < PIECE_SIZE; ++j) {
+                std::cout<<grid[i][j];
                 layout[i][j] = NULL;
                 if(grid[i][j] == 1) {
                     layout[i][j] = new Block(colour);
@@ -185,6 +186,7 @@ namespace TetraBlocks {
                     layout[i][j]->y = j;
                 }
             }
+            std::cout<<std::endl;
         }
         x = X;
         y = Y;
@@ -203,6 +205,7 @@ namespace TetraBlocks {
     void Piece::display(int offsetX, int offsetY, SDL_Surface * screen) {
         int drawX = offsetX + x * Block::WIDTH;
         int drawY = offsetY + y * Block::HEIGHT;
+        //std::cout<<"Drawing piece at ("<<drawX<<", "<<drawY<<")\n";
         for(int i = 0; i < PIECE_SIZE; ++i) {
             for(int j = 0; j < PIECE_SIZE; ++j) {
                 if(layout[i][j] != NULL) {
