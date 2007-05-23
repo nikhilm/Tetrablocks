@@ -22,7 +22,7 @@ namespace TetraBlocks {
         }
         currentPiece = Piece::createRandomPiece(START_X, START_Y);
         moveDownTime = SDL_GetTicks();
-        downTime = 1000;
+        downTime = DEFAULT_DOWNTIME;
         
         return true;
     }
@@ -54,6 +54,7 @@ namespace TetraBlocks {
            switch(event.key.keysym.sym) {
                case SDLK_SPACE:
                    currentPiece = Piece::createRandomPiece(START_X, START_Y);
+                   downTime = DEFAULT_DOWNTIME;
                    break;
                case SDLK_DOWN:
                    currentPiece->moveDown();

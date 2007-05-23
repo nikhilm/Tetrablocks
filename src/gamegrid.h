@@ -16,7 +16,7 @@
 namespace TetraBlocks {
     class GameGrid : public State {
     private:
-        enum {TOP=50, LEFT = 200, GRID_WIDTH = 10, GRID_HEIGHT = 20, START_X=3, START_Y=0};
+        enum {TOP=50, LEFT = 200, GRID_WIDTH = 10, GRID_HEIGHT = 20, START_X=3, START_Y=0, DEFAULT_DOWNTIME=1000};
 
         Block * grid[GRID_HEIGHT][GRID_WIDTH];
 
