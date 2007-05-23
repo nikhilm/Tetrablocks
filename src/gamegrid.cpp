@@ -49,6 +49,7 @@ namespace TetraBlocks {
         return true; 
     }
     void GameGrid::handle(SDL_Event &event) {
+        currentPiece->handle(event);
         if(event.type == SDL_KEYDOWN) {
            switch(event.key.keysym.sym) {
                case SDLK_SPACE:

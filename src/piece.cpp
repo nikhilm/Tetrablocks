@@ -178,7 +178,6 @@ namespace TetraBlocks {
     Piece::Piece(int X, int Y, int grid[PIECE_SIZE][PIECE_SIZE], SDL_Surface * colour) {
         for(int i = 0; i < PIECE_SIZE; ++i) {
             for(int j = 0; j < PIECE_SIZE; ++j) {
-                std::cout<<grid[i][j];
                 layout[i][j] = NULL;
                 if(grid[i][j] == 1) {
                     layout[i][j] = new Block(colour);
@@ -186,7 +185,6 @@ namespace TetraBlocks {
                     layout[i][j]->y = i;
                 }
             }
-            std::cout<<std::endl;
         }
         x = X;
         y = Y;
@@ -201,6 +199,32 @@ namespace TetraBlocks {
             }
         }
     }
+
+    // moves all blocks left if number is -ve, right if +ve
+    void Piece::moveSideways(int side) {
+        for(int i = 0; i < PIECE_SIZE; ++i) {
+            for(int j = 0; j < PIECE_SIZE; ++j) {
+                if(layout[i][j] != NULL) {
+                    layout[i][j]->x += ( side < 0 ? -1 : 1 );
+                }
+            }
+        }
+    }
+
+    void Piece::handle(SDL_Event &event) {
+        if(event.type == SDL_KEYDOWN) {
+            switch(event.key.keysym.sym) {
+                case SDLK_LEFT:
+                    moveSideways(-1);
+                    break;
+                case SDLK_RIGHT:
+                    moveSideways(1);
+                    break;
+                default:break;
+            }
+        }
+    }
+
 
     void Piece::display(int offsetX, int offsetY, SDL_Surface * screen) {
         int drawX = offsetX + x * Block::WIDTH;
