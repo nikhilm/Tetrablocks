@@ -182,8 +182,8 @@ namespace TetraBlocks {
                 layout[i][j] = NULL;
                 if(grid[i][j] == 1) {
                     layout[i][j] = new Block(colour);
-                    layout[i][j]->x = i;
-                    layout[i][j]->y = j;
+                    layout[i][j]->x = j;
+                    layout[i][j]->y = i;
                 }
             }
             std::cout<<std::endl;
@@ -209,7 +209,7 @@ namespace TetraBlocks {
         for(int i = 0; i < PIECE_SIZE; ++i) {
             for(int j = 0; j < PIECE_SIZE; ++j) {
                 if(layout[i][j] != NULL) {
-                    layout[i][j]->display(drawX + i, drawY + j, screen);
+                    layout[i][j]->display(drawX, drawY, screen);
                 }
             }
         }
