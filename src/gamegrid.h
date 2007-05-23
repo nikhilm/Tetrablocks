@@ -24,6 +24,11 @@ namespace TetraBlocks {
 
         Piece * currentPiece;
 
+        Uint32 moveDownTime;
+
+        //starting downTime, is decremented later
+        Uint32 downTime;
+
 
     public:
 

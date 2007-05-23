@@ -21,6 +21,8 @@ namespace TetraBlocks {
             }
         }
         currentPiece = Piece::createRandomPiece(START_X, START_Y);
+        moveDownTime = SDL_GetTicks();
+        downTime = 1000;
         
         return true;
     }
@@ -37,6 +39,13 @@ namespace TetraBlocks {
     }
 
     bool GameGrid::update(Game * game) { 
+
+        Uint32 now = SDL_GetTicks();
+        if(now >= moveDownTime) {
+            currentPiece->moveDown();
+            downTime -= 100;
+            moveDownTime = SDL_GetTicks() + downTime;
+        }
         return true; 
     }
     void GameGrid::handle(SDL_Event &event) {
