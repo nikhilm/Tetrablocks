@@ -39,6 +39,10 @@ namespace TetraBlocks {
             
             Piece(int, int, int [PIECE_SIZE][PIECE_SIZE], SDL_Surface * );
             void moveSideways(int);
+            int getLeftBound();
+            int getRightBound();
+
+            void movePiece(int, int);
             
         public:
             static  Piece * createRandomPiece(int x, int y) {

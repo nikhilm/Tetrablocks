@@ -6,6 +6,7 @@
  * Licensed under the GNU GPL
  */
 
+#include "gamegrid.h"
 #include "piece.h"
 
 namespace TetraBlocks {
@@ -181,13 +182,15 @@ namespace TetraBlocks {
                 layout[i][j] = NULL;
                 if(grid[i][j] == 1) {
                     layout[i][j] = new Block(colour);
-                    layout[i][j]->x = j;
-                    layout[i][j]->y = i;
+                    layout[i][j]->x = X+j;
+                    layout[i][j]->y = Y+i;
+                    std::cout<<"Created block at ("<<X+j<<", "<<Y+i<<")\n";
                 }
             }
         }
         x = X;
         y = Y;
+        std::cout<<"Created Piece at ("<<x<<", "<<y<<")\n";
     };
     
     void Piece::moveDown() {
@@ -198,16 +201,59 @@ namespace TetraBlocks {
                 }
             }
         }
+        y++;
+    }
+
+    int Piece::getLeftBound() {
+        int bound = GameGrid::GRID_WIDTH;
+        for(int i = 0; i < PIECE_SIZE; ++i) {
+            for(int j = 0; j < PIECE_SIZE; ++j) {
+                if(layout[i][j] != NULL) {
+                    if(layout[i][j]->x < bound)
+                        bound = layout[i][j]->x;
+                }
+            }
+        }
+        std::cout<<"left bound = "<<bound<<std::endl;
+        return bound;
+    }
+
+    int Piece::getRightBound() {
+        int bound = 0;
+        for(int i = 0; i < PIECE_SIZE; ++i) {
+            for(int j = 0; j < PIECE_SIZE; ++j) {
+                if(layout[i][j] != NULL) {
+                    if(layout[i][j]->x > bound)
+                        bound = layout[i][j]->x;
+                }
+            }
+        }
+        std::cout<<"right bound = "<<bound<<std::endl;
+        return bound;
+    }
+
+    //handles updating coordinates of piece and its blocks
+    void Piece::movePiece(int deltaX, int deltaY) {
+        for(int i = 0; i < PIECE_SIZE; ++i) {
+            for(int j = 0; j < PIECE_SIZE; ++j) {
+                if(layout[i][j] != NULL) {
+                    layout[i][j]->x += deltaX; 
+                    layout[i][j]->y += deltaY; 
+                }
+            }
+        }
+        x += deltaX;
+        y += deltaY;
+        std::cout<<"Moving piece by "<<deltaX<<", "<<deltaY<<std::endl;
     }
 
     // moves all blocks left if number is -ve, right if +ve
     void Piece::moveSideways(int side) {
-        for(int i = 0; i < PIECE_SIZE; ++i) {
-            for(int j = 0; j < PIECE_SIZE; ++j) {
-                if(layout[i][j] != NULL) {
-                    layout[i][j]->x += ( side < 0 ? -1 : 1 );
-                }
-            }
+        if( side < 0 && getLeftBound() > 0 ) {
+            movePiece(-1, 0);
+        }
+        else if( side > 0 && getRightBound() < GameGrid::GRID_WIDTH ) {
+            movePiece(1, 0);
         }
     }
 
