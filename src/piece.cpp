@@ -184,13 +184,11 @@ namespace TetraBlocks {
                     layout[i][j] = new Block(colour);
                     layout[i][j]->x = X+j;
                     layout[i][j]->y = Y+i;
-                    std::cout<<"Created block at ("<<X+j<<", "<<Y+i<<")\n";
                 }
             }
         }
         x = X;
         y = Y;
-        std::cout<<"Created Piece at ("<<x<<", "<<y<<")\n";
     };
     
     void Piece::moveDown() {
@@ -214,7 +212,6 @@ namespace TetraBlocks {
                 }
             }
         }
-        std::cout<<"left bound = "<<bound<<std::endl;
         return bound;
     }
 
@@ -228,7 +225,6 @@ namespace TetraBlocks {
                 }
             }
         }
-        std::cout<<"right bound = "<<bound<<std::endl;
         return bound;
     }
 
@@ -244,7 +240,6 @@ namespace TetraBlocks {
         }
         x += deltaX;
         y += deltaY;
-        std::cout<<"Moving piece by "<<deltaX<<", "<<deltaY<<std::endl;
     }
 
     // moves all blocks left if number is -ve, right if +ve
@@ -252,7 +247,7 @@ namespace TetraBlocks {
         if( side < 0 && getLeftBound() > 0 ) {
             movePiece(-1, 0);
         }
-        else if( side > 0 && getRightBound() < GameGrid::GRID_WIDTH ) {
+        else if( side > 0 && getRightBound() < GameGrid::GRID_WIDTH - 1 ) {
             movePiece(1, 0);
         }
     }
@@ -273,13 +268,10 @@ namespace TetraBlocks {
 
 
     void Piece::display(int offsetX, int offsetY, SDL_Surface * screen) {
-        int drawX = offsetX + x * Block::WIDTH;
-        int drawY = offsetY + y * Block::HEIGHT;
-        //std::cout<<"Drawing piece at ("<<drawX<<", "<<drawY<<")\n";
         for(int i = 0; i < PIECE_SIZE; ++i) {
             for(int j = 0; j < PIECE_SIZE; ++j) {
                 if(layout[i][j] != NULL) {
-                    layout[i][j]->display(drawX, drawY, screen);
+                    layout[i][j]->display(offsetX, offsetY, screen);
                 }
             }
         }
