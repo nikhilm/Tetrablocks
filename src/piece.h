@@ -21,14 +21,14 @@ namespace TetraBlocks {
     class Piece {
         private:
             //height, width in block terms
-            enum { PIECE_SIZE = 4, NB_PIECES=7};
+            enum { PIECE_SIZE = 4, NB_PIECES=7, NB_ROTATIONS=4};
             
             /**************************************************
              * SHAPES LAYOUT DESCRIPTION BEGINS               *
              * Their are 7 shapes. Each shape has 4 positions.*
              * Each position is represented by a 4x4 array    *
              *************************************************/
-            static int SHAPES[NB_PIECES][4][4][4];
+            static int SHAPES[NB_PIECES][NB_ROTATIONS][PIECE_SIZE][PIECE_SIZE];
             
             
             static SDL_Surface * COLOURS[NB_PIECES];

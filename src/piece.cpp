@@ -10,7 +10,7 @@
 #include "piece.h"
 
 namespace TetraBlocks {
-     int Piece::SHAPES[NB_PIECES][4][4][4] = {
+     int Piece::SHAPES[NB_PIECES][NB_ROTATIONS][PIECE_SIZE][PIECE_SIZE] = {
         // I shape
         {{{0, 1, 0, 0},
           {0, 1, 0, 0},
