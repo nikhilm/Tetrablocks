@@ -39,6 +39,8 @@ namespace TetraBlocks {
 
             SDL_Surface * colour;
             int shapeMap[NB_ROTATIONS][PIECE_SIZE][PIECE_SIZE];
+
+            short currentOrientation;
             
             Piece(int, int, int, SDL_Surface * );
             void moveSideways(int);
@@ -47,7 +49,7 @@ namespace TetraBlocks {
 
             void movePiece(int, int);
 
-            void setOrientation(int);
+            void setNextOrientation();
             
         public:
             static  Piece * createRandomPiece(int x, int y) {

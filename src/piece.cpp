@@ -183,17 +183,18 @@ namespace TetraBlocks {
                     shapeMap[k][i][j] = Piece::SHAPES[shapeIndex][k][i][j];
                 }
         colour = col;
+        currentOrientation = -1;
         x = X;
         y = Y;
-        setOrientation(0);
+        setNextOrientation();
     };
 
-    void Piece::setOrientation(int ind) {
-        int index = ind % NB_ROTATIONS;
+    void Piece::setNextOrientation() {
+        currentOrientation = (currentOrientation + 1)%NB_ROTATIONS;
         for(int i = 0; i < PIECE_SIZE; ++i) {
             for(int j = 0; j < PIECE_SIZE; ++j) {
                 layout[i][j] = NULL;
-                if(shapeMap[index][i][j] == 1) {
+                if(shapeMap[currentOrientation][i][j] == 1) {
                     layout[i][j] = new Block(colour);
                     layout[i][j]->x = x+j;
                     layout[i][j]->y = y+i;
@@ -272,11 +273,13 @@ namespace TetraBlocks {
                 case SDLK_RIGHT:
                     moveSideways(1);
                     break;
+                case SDLK_UP:
+                    setNextOrientation();
+                    break;
                 default:break;
             }
         }
     }
-
 
     void Piece::display(int offsetX, int offsetY, SDL_Surface * screen) {
         for(int i = 0; i < PIECE_SIZE; ++i) {
