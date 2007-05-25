@@ -36,18 +36,23 @@ namespace TetraBlocks {
             
             Block * layout[PIECE_SIZE][PIECE_SIZE];
             int x, y;
+
+            SDL_Surface * colour;
+            int shapeMap[NB_ROTATIONS][PIECE_SIZE][PIECE_SIZE];
             
-            Piece(int, int, int [PIECE_SIZE][PIECE_SIZE], SDL_Surface * );
+            Piece(int, int, int, SDL_Surface * );
             void moveSideways(int);
             int getLeftBound();
             int getRightBound();
 
             void movePiece(int, int);
+
+            void setOrientation(int);
             
         public:
             static  Piece * createRandomPiece(int x, int y) {
                 int index = rand()%NB_PIECES;
-                return new Piece(x, y, SHAPES[index][0], COLOURS[index]);
+                return new Piece(x, y, index, COLOURS[index]);
             };
             
             // NOTE: Called only by colours array to load images

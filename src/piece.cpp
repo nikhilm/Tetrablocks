@@ -176,20 +176,31 @@ namespace TetraBlocks {
         genImageSurface("orange")
     };
     
-    Piece::Piece(int X, int Y, int grid[PIECE_SIZE][PIECE_SIZE], SDL_Surface * colour) {
+    Piece::Piece(int X, int Y, int shapeIndex, SDL_Surface * col) {
+        for(int k = 0; k < NB_ROTATIONS; ++k)
+            for(int i = 0; i < PIECE_SIZE; ++i)
+                for(int j = 0; j < PIECE_SIZE; ++j) {
+                    shapeMap[k][i][j] = Piece::SHAPES[shapeIndex][k][i][j];
+                }
+        colour = col;
+        x = X;
+        y = Y;
+        setOrientation(0);
+    };
+
+    void Piece::setOrientation(int ind) {
+        int index = ind % NB_ROTATIONS;
         for(int i = 0; i < PIECE_SIZE; ++i) {
             for(int j = 0; j < PIECE_SIZE; ++j) {
                 layout[i][j] = NULL;
-                if(grid[i][j] == 1) {
+                if(shapeMap[index][i][j] == 1) {
                     layout[i][j] = new Block(colour);
-                    layout[i][j]->x = X+j;
-                    layout[i][j]->y = Y+i;
+                    layout[i][j]->x = x+j;
+                    layout[i][j]->y = y+i;
                 }
             }
         }
-        x = X;
-        y = Y;
-    };
+    }
     
     void Piece::moveDown() {
         for(int i = 0; i < PIECE_SIZE; ++i) {
