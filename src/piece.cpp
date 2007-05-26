@@ -291,5 +291,9 @@ namespace TetraBlocks {
             }
         }
     }
+
+    Piece::~Piece() {
+        delete shapeMap[NB_ROTATIONS][PIECE_SIZE][PIECE_SIZE];
+    }
 }
             

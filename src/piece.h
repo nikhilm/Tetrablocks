@@ -72,6 +72,8 @@ namespace TetraBlocks {
             void moveDown();
 
             void handle(SDL_Event &);
+
+            ~Piece();
     }; // class Piece
 }; //namespace TetraBlocks
 #endif
