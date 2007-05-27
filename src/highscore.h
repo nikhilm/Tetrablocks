@@ -15,6 +15,7 @@
 #include<fstream>
 #include<iostream>
 #include<string>
+#include<vector>
 
 using namespace std;
 
@@ -50,7 +51,7 @@ namespace NMUtils {
          */
         Score() {
             score = 0;
-            name = NULL;
+            name = "";
         }
 
         int getScore() { return score; };
@@ -74,13 +75,6 @@ namespace NMUtils {
     };
 
     class Highscore {
-    private:
-        fstream  * hs_file;
-
-    public:
-        Highscore(const char *);
-        bool bad();
-
     };
 };
 
