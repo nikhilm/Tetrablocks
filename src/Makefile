@@ -16,7 +16,10 @@ clean:
 objects:$(INCLUDES) $(SOURCES)
 	$(CC) $(CFLAGS) $(INCLUDES) $(SOURCES) -c
 
-tetrablocks:objects main.cpp
+tetrablocks:objects main.cpp highscores
 	$(CC) $(LDFLAGS) *.o main.cpp -o tetrablocks
+
+highscores:highscore.cpp highscore.h
+	$(CC) test_highscore.cpp highscore.* -o test_highscore
 
 
