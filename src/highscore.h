@@ -42,6 +42,17 @@ namespace NMUtils {
             name = nam;
         };
 
+        /**
+         * Creates an empty score object.
+         * You should use operator>> to write to this
+         *
+         * @see operator>>
+         */
+        Score() {
+            score = 0;
+            name = NULL;
+        }
+
         int getScore() { return score; };
         string getName() { return name; };
         
