@@ -56,6 +56,10 @@ namespace NMUtils {
 		friend std::ostream& operator<< (std::ostream& os, const Score &s ) {
 			return os<<s.score<<(char)DELIM<<s.name<<endl;
 		};
+
+        friend std::istream& operator>> (std::istream& in, Score &s ) {
+            return in >> s.score >> s.name;
+        };
     };
 
     class Highscore {
@@ -65,6 +69,7 @@ namespace NMUtils {
     public:
         Highscore(const char *);
         bool bad();
+
     };
 };
 
