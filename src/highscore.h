@@ -70,11 +70,48 @@ namespace NMUtils {
 		};
 
         friend std::istream& operator>> (std::istream& in, Score &s ) {
-            return in >> s.score >> s.name;
+            int scor;
+            string nam;
+            in >> scor >> nam;
+            cout<<scor<<" "<<nam<<endl;
+            return in;
         };
     };
 
     class Highscore {
+    private:
+        fstream hsFile;
+        vector <Score> scoreList;
+        
+        int limit;
+
+        void readIntoMemory() {
+            hsFile.seekg(ios::beg);
+            while(!hsFile.eof()) {
+                Score s;
+                hsFile >> s;
+                cout<<"Read in score:"<<s.getScore()<<std::endl;
+                scoreList.push_back(s);
+                cout<<s;
+            }
+        };
+
+    public:
+
+        Highscore(const char * filename) {
+            hsFile.open(filename);
+            limit = -1;
+            readIntoMemory();
+        };
+
+        void setLimit(int lim) {
+            if(lim <= 0 && lim != -1) return;
+            
+            limit = lim;
+        };
+
+        vector<Score> getScores() { return vector<Score>(scoreList); };
+
     };
 };
 

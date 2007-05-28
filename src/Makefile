@@ -19,7 +19,7 @@ objects:$(INCLUDES) $(SOURCES)
 tetrablocks:objects main.cpp highscores
 	$(CC) $(LDFLAGS) *.o main.cpp -o tetrablocks
 
-highscores:highscore.cpp highscore.h
-	$(CC) test_highscore.cpp highscore.* -o test_highscore
+highscores:highscore.h
+	$(CC) test_highscore.cpp highscore.h -o test_highscore
 
 
