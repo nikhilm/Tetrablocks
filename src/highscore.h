@@ -70,11 +70,7 @@ namespace NMUtils {
 		};
 
         friend std::istream& operator>> (std::istream& in, Score &s ) {
-            int scor;
-            string nam;
-            in >> scor >> nam;
-            cout<<scor<<" "<<nam<<endl;
-            return in;
+            return in >> s.score >> s.name;
         };
     };
 
@@ -88,12 +84,13 @@ namespace NMUtils {
         void readIntoMemory() {
             hsFile.seekg(ios::beg);
             while(!hsFile.eof()) {
+                if(hsFile.eof()) break;
                 Score s;
                 hsFile >> s;
-                cout<<"Read in score:"<<s.getScore()<<std::endl;
                 scoreList.push_back(s);
-                cout<<s;
             }
+            //last entry is empty, remove it
+            scoreList.pop_back();
         };
 
     public:
