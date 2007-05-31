@@ -22,4 +22,7 @@ tetrablocks:objects main.cpp highscores
 highscores:highscore.h
 	$(CC) test_highscore.cpp highscore.h -o test_highscore
 
+menu:menu.h
+	$(CC) $(CFLAGS)  menu.h menu.cpp -c
+	$(CC) $(LDFLAGS) menu.o test_menu.cpp -o test_menu
 
