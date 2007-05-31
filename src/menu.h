@@ -29,7 +29,8 @@ namespace NMUtils {
 
         int width, height, borderWidth;
 
-        //X and Y offsets and display surface, set by display before calling other display functions
+        //X and Y offsets set by Constructor 
+        //display surface, set by display before calling other display functions
         int oX, oY;
         SDL_Surface * surf;
 
@@ -40,13 +41,14 @@ namespace NMUtils {
         void displayHover();
 
     public:
+        MenuItem(int x, int y, char * text, void (*callback)(SDL_Event &));
+
         SDL_Color createColor(int r, int g, int b);
-        MenuItem(char * text, void (*callback)(SDL_Event &));
         void setText(char *text);
         void setAction(void (*callback)(SDL_Event &));
         void setDimensions(int, int);
 
-        void display(int, int, SDL_Surface * screen);
+        void display(SDL_Surface * screen);
 
         //setters
         void setBackground(SDL_Color col) {
@@ -83,6 +85,14 @@ namespace NMUtils {
 
         void setTextHoverColor(SDL_Color col) {
             textHover = col;
+        };
+
+        void setX(int x) {
+            oX = x;
+        };
+
+        void setY(int y) {
+            oY = y;
         };
     };
 

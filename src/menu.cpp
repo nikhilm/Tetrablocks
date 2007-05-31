@@ -20,14 +20,16 @@ namespace NMUtils {
         return col;
     }
 
-    MenuItem::MenuItem(char * text, void (*callback)(SDL_Event &)) {
+    MenuItem::MenuItem(int x, int y, char * text, void (*callback)(SDL_Event &)) {
         itemText = text;
         actionCallback = callback;
 
+        setX(x);
+        setY(y);
         setDimensions(300, 75);
 
         //foregroundNormal = SDL_MapRGB(
-        backgroundNormal = createColor(255, 0, 0);
+        setBackground(createColor(255, 0, 0));
     }
 
     void MenuItem::setText(char *text) {
@@ -43,10 +45,10 @@ namespace NMUtils {
         height = h;
     }
 
-    void MenuItem::display(int offsetX, int offsetY, SDL_Surface *screen) {
+    void MenuItem::display(SDL_Surface *screen) {
         SDL_Rect r;
-        r.x = offsetX;
-        r.y = offsetY;
+        r.x = oX;
+        r.y = oY;
         r.w = width;
         r.h = height;
 
