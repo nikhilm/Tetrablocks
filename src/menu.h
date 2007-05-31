@@ -39,8 +39,6 @@ namespace NMUtils {
         int oX, oY;
         SDL_Surface * surf;
 
-        void toggleState();
-
     protected:
         void drawBorder();
         void drawText();
