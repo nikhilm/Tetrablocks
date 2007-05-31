@@ -27,12 +27,17 @@ namespace NMUtils {
         //colours
         SDL_Color foregroundNormal, backgroundNormal, borderNormal, foregroundHover, backgroundHover, borderHover;
 
+        int width, height;
+
         SDL_Color createColor(int r, int g, int b);
 
     public:
         MenuItem(char * text, void (*callback)(SDL_Event &));
         void setText(char *text);
         void setAction(void (*callback)(SDL_Event &));
+        void setDimensions(int, int);
+
+        void display(int, int, SDL_Surface * screen);
     };
 
 };
