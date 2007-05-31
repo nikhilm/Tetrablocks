@@ -25,10 +25,19 @@ namespace NMUtils {
         void (*actionCallback)(SDL_Event &);
 
         //colours
-        SDL_Color foregroundNormal, backgroundNormal, borderNormal, foregroundHover, backgroundHover, borderHover;
+        SDL_Color foregroundNormal, backgroundNormal, borderNormal, foregroundHover, backgroundHover, borderHover, textNormal, textHover;
 
-        int width, height;
+        int width, height, borderWidth;
 
+        //X and Y offsets and display surface, set by display before calling other display functions
+        int oX, oY;
+        SDL_Surface * surf;
+
+    protected:
+        void drawBorder();
+        void drawText();
+        void displayNormal();
+        void displayHover();
 
     public:
         SDL_Color createColor(int r, int g, int b);
@@ -38,6 +47,43 @@ namespace NMUtils {
         void setDimensions(int, int);
 
         void display(int, int, SDL_Surface * screen);
+
+        //setters
+        void setBackground(SDL_Color col) {
+            backgroundNormal = col;
+        };
+
+        void setForeground(SDL_Color col) {
+            foregroundNormal = col;
+        };
+
+        void setBorder(SDL_Color col) {
+            borderNormal = col;
+        };
+
+        void setBackgroundHover(SDL_Color col) {
+            backgroundHover = col;
+        };
+
+        void setForegroundHover(SDL_Color col) {
+            foregroundHover = col;
+        };
+
+        void setBorderHover(SDL_Color col) {
+            borderHover = col;
+        };
+
+        void setBorderWidth(int width) {
+            borderWidth = width;
+        };
+
+        void setTextColor(SDL_Color col) {
+            textNormal = col;
+        };
+
+        void setTextHoverColor(SDL_Color col) {
+            textHover = col;
+        };
     };
 
 };
