@@ -63,5 +63,8 @@ namespace NMUtils {
         SDL_FillRect(screen, &r, SDL_MapRGB(screen->format, backgroundNormal.r, backgroundNormal.g, backgroundNormal.b));
     };
 
+    bool MenuItem::pointInsideThis(int pX, int pY) {
+        return ( pX >= oX && pX <= (oX + width) && pY >= oY && pY <= (oY + height) );
+    };
 };
 

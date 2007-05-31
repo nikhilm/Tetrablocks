@@ -57,6 +57,8 @@ namespace NMUtils {
 
         void handle(SDL_Event &);
 
+        bool pointInsideThis(int, int);
+
         //setters
         void setBackground(SDL_Color col) {
             backgroundNormal = col;
