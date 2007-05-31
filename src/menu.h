@@ -21,6 +21,11 @@ using namespace std;
 namespace NMUtils {
     class MenuItem {
     private:
+
+        enum State { NORMAL, HOVER};
+
+        State currentState;
+        
         char * itemText;
         void (*actionCallback)(SDL_Event &);
 
@@ -41,14 +46,16 @@ namespace NMUtils {
         void displayHover();
 
     public:
-        MenuItem(int x, int y, char * text, void (*callback)(SDL_Event &));
+        MenuItem(int x, int y, char * , void (*callback)(SDL_Event &));
 
         SDL_Color createColor(int r, int g, int b);
-        void setText(char *text);
+        void setText(char *);
         void setAction(void (*callback)(SDL_Event &));
         void setDimensions(int, int);
 
-        void display(SDL_Surface * screen);
+        void display(SDL_Surface *);
+
+        void handle(SDL_Event &);
 
         //setters
         void setBackground(SDL_Color col) {
