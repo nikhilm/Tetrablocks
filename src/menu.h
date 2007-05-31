@@ -29,9 +29,9 @@ namespace NMUtils {
 
         int width, height;
 
-        SDL_Color createColor(int r, int g, int b);
 
     public:
+        SDL_Color createColor(int r, int g, int b);
         MenuItem(char * text, void (*callback)(SDL_Event &));
         void setText(char *text);
         void setAction(void (*callback)(SDL_Event &));
