@@ -61,10 +61,25 @@ namespace NMUtils {
         r.h = height;
 
         SDL_FillRect(screen, &r, SDL_MapRGB(screen->format, backgroundNormal.r, backgroundNormal.g, backgroundNormal.b));
-    };
+    }
 
     bool MenuItem::pointInsideThis(int pX, int pY) {
         return ( pX >= oX && pX <= (oX + width) && pY >= oY && pY <= (oY + height) );
-    };
+    }
+
+    void MenuItem::handle(SDL_Event &event) {
+        if(event.type == SDL_MOUSEBUTTONUP && event.button.button == SDL_BUTTON_LEFT) {
+            if(pointInsideThis(event.button.x, event.button.y)) {
+                toggleState();
+            }
+        }
+    }
+
+    void MenuItem::toggleState() {
+        if(currentState == NORMAL)
+            currentState = HOVER;
+        else if(currentState == HOVER)
+            currentState = NORMAL;
+    }
 };
 

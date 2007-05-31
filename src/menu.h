@@ -39,6 +39,8 @@ namespace NMUtils {
         int oX, oY;
         SDL_Surface * surf;
 
+        void toggleState();
+
     protected:
         void drawBorder();
         void drawText();
@@ -55,7 +57,7 @@ namespace NMUtils {
 
         void display(SDL_Surface *);
 
-        void handle(SDL_Event &);
+        void handle(SDL_Event&);
 
         bool pointInsideThis(int, int);
 
