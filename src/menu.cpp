@@ -28,8 +28,16 @@ namespace NMUtils {
         setY(y);
         setDimensions(300, 75);
 
-        //foregroundNormal = SDL_MapRGB(
-        setBackground(createColor(255, 0, 0));
+        //default red and black theme
+        SDL_Color red = createColor(255, 0, 0);
+        SDL_Color black = createColor(0, 0, 0);
+        setForeground(red);
+        setBackground(black);
+        setBorder(red);
+
+        setForegroundHover(black);
+        setBackgroundHover(red);
+        setBorderHover(red);
     }
 
     void MenuItem::setText(char *text) {
