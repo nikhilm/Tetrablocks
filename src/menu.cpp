@@ -37,6 +37,7 @@ namespace NMUtils {
         setX(x);
         setY(y);
         setDimensions(300, 75);
+        setBorderWidth(5);
 
         //default red and black theme
         SDL_Color red = createColor(255, 0, 0);
