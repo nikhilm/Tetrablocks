@@ -101,7 +101,7 @@ namespace NMUtils {
     }
 
     void MenuItem::drawBorder() {
-        SDL_FillRect(surf, &createRect(oX, oY, width, height), getMappedColor(borderNormal));
+        SDL_FillRect(surf, &createRect(oX, oY, width, height), getMappedColor((currentState == NORMAL ? borderNormal : borderHover)));
         //fill in the remaining with black
         SDL_FillRect(surf, &getBackgroundRect(), getMappedColor(createColor(0, 0, 0)));
 
