@@ -86,15 +86,15 @@ namespace NMUtils {
     }
 
     void MenuItem::handle(SDL_Event &event) {
-        if(pointInsideThis(event.button.x, event.button.y)) {
-            if(event.type == SDL_MOUSEBUTTONUP && event.button.button == SDL_BUTTON_LEFT) {
-                actionCallback(event);
+        if(event.type == SDL_MOUSEBUTTONUP && event.button.button == SDL_BUTTON_LEFT) {
+            actionCallback(event);
+        }
+        else if(event.type == SDL_MOUSEMOTION) {
+            if(pointInsideThis(event.motion.x, event.motion.y)) {
+                currentState = HOVER;
             }
-            else if(event.type == SDL_MOUSEMOTION) {
-                if(pointInsideThis(event.motion.x, event.motion.y))
-                    currentState = HOVER;
-                else
-                    currentState = NORMAL;
+            else {
+                currentState = NORMAL;
             }
         }
     }
