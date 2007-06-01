@@ -76,9 +76,9 @@ namespace NMUtils {
         surf = screen;
 
         if(currentState == NORMAL)
-            drawNormal();
+            displayNormal();
         else if(currentState == HOVER)
-            drawHover();
+            displayHover();
     }
 
     bool MenuItem::pointInsideThis(int pX, int pY) {
@@ -103,6 +103,16 @@ namespace NMUtils {
         SDL_FillRect(surf, &createRect(oX, oY, width, height), getMappedColor(borderNormal));
         SDL_FillRect(surf, &getBackgroundRect(), getMappedColor((currentState == NORMAL ? backgroundNormal : backgroundHover)));
 
+    }
+
+    void MenuItem::displayNormal() {
+        drawBorder();
+        SDL_FillRect(surf, &getBackgroundRect(), getMappedColor(backgroundNormal));
+    }
+
+    void MenuItem::displayHover() {
+        drawBorder();
+        SDL_FillRect(surf, &getBackgroundRect(), getMappedColor(backgroundHover));
     }
 
 };
