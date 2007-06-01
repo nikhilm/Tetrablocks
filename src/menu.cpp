@@ -20,6 +20,15 @@ namespace NMUtils {
         return col;
     }
 
+    SDL_Rect createRect(int x, int y, int w, int h) {
+        SDL_Rect r;
+        r.x = x;
+        r.y = y;
+        r.w = w;
+        r.h = h;
+        return r;
+    }
+
     MenuItem::MenuItem(int x, int y, char * text, void (*callback)(SDL_Event &)) {
         itemText = text;
         actionCallback = callback;
