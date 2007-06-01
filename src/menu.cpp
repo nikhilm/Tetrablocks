@@ -20,13 +20,17 @@ namespace NMUtils {
         return col;
     }
 
-    SDL_Rect createRect(int x, int y, int w, int h) {
+    SDL_Rect MenuItem::createRect(int x, int y, int w, int h) {
         SDL_Rect r;
         r.x = x;
         r.y = y;
         r.w = w;
         r.h = h;
         return r;
+    }
+
+    Uint32 MenuItem::getMappedColor(SDL_Color col) {
+        return SDL_MapRGB(surf->format, col.r, col.g, col.b);
     }
 
     MenuItem::MenuItem(int x, int y, char * text, void (*callback)(SDL_Event &)) {
@@ -65,13 +69,9 @@ namespace NMUtils {
     }
 
     void MenuItem::display(SDL_Surface *screen) {
-        SDL_Rect r;
-        r.x = oX;
-        r.y = oY;
-        r.w = width;
-        r.h = height;
+        surf = screen;
 
-        SDL_FillRect(screen, &r, SDL_MapRGB(screen->format, backgroundNormal.r, backgroundNormal.g, backgroundNormal.b));
+        drawBorder();
     }
 
     bool MenuItem::pointInsideThis(int pX, int pY) {
@@ -90,6 +90,10 @@ namespace NMUtils {
                     currentState = NORMAL;
             }
         }
+    }
+
+    void MenuItem::drawBorder() {
+        SDL_FillRect(surf, &createRect(oX, oY, width, height), getMappedColor(borderNormal));
     }
 
 };

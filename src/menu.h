@@ -39,6 +39,8 @@ namespace NMUtils {
         int oX, oY;
         SDL_Surface * surf;
 
+        Uint32 getMappedColor(SDL_Color);
+
     protected:
         void drawBorder();
         void drawText();
@@ -50,6 +52,7 @@ namespace NMUtils {
 
         SDL_Color createColor(int r, int g, int b);
         SDL_Rect createRect(int, int, int, int);
+
         void setText(char *);
         void setAction(void (*callback)(SDL_Event &));
         void setDimensions(int, int);
