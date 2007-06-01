@@ -94,6 +94,8 @@ namespace NMUtils {
 
     void MenuItem::drawBorder() {
         SDL_FillRect(surf, &createRect(oX, oY, width, height), getMappedColor(borderNormal));
+        SDL_FillRect(surf, &createRect(oX + borderWidth, oY + borderWidth, width - 2*borderWidth, height - 2*borderWidth), getMappedColor(backgroundNormal));
+
     }
 
 };
