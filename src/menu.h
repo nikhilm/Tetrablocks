@@ -30,7 +30,7 @@ namespace NMUtils {
         void (*actionCallback)(SDL_Event &);
 
         //colours
-        SDL_Color foregroundNormal, backgroundNormal, borderNormal, foregroundHover, backgroundHover, borderHover, textNormal, textHover;
+        SDL_Color foregroundNormal, backgroundNormal, borderNormal, foregroundHover, backgroundHover, borderHover;
 
         int width, height, borderWidth;
 
@@ -90,14 +90,6 @@ namespace NMUtils {
 
         void setBorderWidth(int width) {
             borderWidth = width;
-        };
-
-        void setTextColor(SDL_Color col) {
-            textNormal = col;
-        };
-
-        void setTextHoverColor(SDL_Color col) {
-            textHover = col;
         };
 
         void setX(int x) {
