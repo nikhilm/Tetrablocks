@@ -75,7 +75,10 @@ namespace NMUtils {
     void MenuItem::display(SDL_Surface *screen) {
         surf = screen;
 
-        drawBorder();
+        if(currentState == NORMAL)
+            drawNormal();
+        else if(currentState == HOVER)
+            drawHover();
     }
 
     bool MenuItem::pointInsideThis(int pX, int pY) {
