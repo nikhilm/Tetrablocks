@@ -1,6 +1,6 @@
 CC=g++
 CFLAGS=-g -Wall $(shell sdl-config --cflags)
-LDFLAGS=-g -Wall $(shell sdl-config --libs) -lSDL_image
+LDFLAGS=-g -Wall $(shell sdl-config --libs) -lSDL_image -lSDL_ttf
 INCLUDES=state.h gamegrid.h blocks.h piece.h
 SOURCES=gamegrid.cpp piece.cpp
 

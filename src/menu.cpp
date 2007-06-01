@@ -32,6 +32,11 @@ namespace NMUtils {
         setForegroundHover(black);
         setBackgroundHover(red);
         setBorderHover(red);
+
+        //try loading SDL_ttf
+        if(!TTF_WasInit() && TTF_Init() == -1) {
+            cerr<<"Error initializing SDL_ttf library, cannot draw text. Error: "<<TTF_GetError()<<endl;
+        }
     }
 
     SDL_Color MenuItem::createColor(int r, int g, int b) {
