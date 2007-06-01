@@ -99,6 +99,14 @@ namespace NMUtils {
         void setY(int y) {
             oY = y;
         };
+
+        void setWidth(int w) {
+            width = w;
+        };
+
+        void setHeight(int h) {
+            height = h;
+        };
     };
 
 };
