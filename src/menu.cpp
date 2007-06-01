@@ -23,6 +23,7 @@ namespace NMUtils {
     MenuItem::MenuItem(int x, int y, char * text, void (*callback)(SDL_Event &)) {
         itemText = text;
         actionCallback = callback;
+        currentState = NORMAL;
 
         setX(x);
         setY(y);
