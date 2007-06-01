@@ -50,8 +50,8 @@ namespace NMUtils {
     public:
         MenuItem(int x, int y, char * , void (*callback)(SDL_Event &));
 
-        SDL_Color createColor(int r, int g, int b);
-        SDL_Rect createRect(int, int, int, int);
+        static SDL_Color createColor(int r, int g, int b);
+        static SDL_Rect createRect(int, int, int, int);
 
         void setText(char *);
         void setAction(void (*callback)(SDL_Event &));
