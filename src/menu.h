@@ -41,6 +41,8 @@ namespace NMUtils {
 
         Uint32 getMappedColor(SDL_Color);
 
+        SDL_Rect getBackgroundRect();
+
     protected:
         void drawBorder();
         void drawText();

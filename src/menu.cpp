@@ -12,27 +12,6 @@
 #include "menu.h"
 
 namespace NMUtils {
-    SDL_Color MenuItem::createColor(int r, int g, int b) {
-        SDL_Color col;
-        col.r = r;
-        col.g = g;
-        col.b = b;
-        return col;
-    }
-
-    SDL_Rect MenuItem::createRect(int x, int y, int w, int h) {
-        SDL_Rect r;
-        r.x = x;
-        r.y = y;
-        r.w = w;
-        r.h = h;
-        return r;
-    }
-
-    Uint32 MenuItem::getMappedColor(SDL_Color col) {
-        return SDL_MapRGB(surf->format, col.r, col.g, col.b);
-    }
-
     MenuItem::MenuItem(int x, int y, char * text, void (*callback)(SDL_Event &)) {
         itemText = text;
         actionCallback = callback;
@@ -53,6 +32,31 @@ namespace NMUtils {
         setForegroundHover(black);
         setBackgroundHover(red);
         setBorderHover(red);
+    }
+
+    SDL_Color MenuItem::createColor(int r, int g, int b) {
+        SDL_Color col;
+        col.r = r;
+        col.g = g;
+        col.b = b;
+        return col;
+    }
+
+    SDL_Rect MenuItem::createRect(int x, int y, int w, int h) {
+        SDL_Rect r;
+        r.x = x;
+        r.y = y;
+        r.w = w;
+        r.h = h;
+        return r;
+    }
+
+    SDL_Rect MenuItem::getBackgroundRect() {
+        return createRect(oX + borderWidth, oY + borderWidth, width - 2*borderWidth, height - 2*borderWidth);
+    }
+
+    Uint32 MenuItem::getMappedColor(SDL_Color col) {
+        return SDL_MapRGB(surf->format, col.r, col.g, col.b);
     }
 
     void MenuItem::setText(char *text) {
@@ -94,7 +98,7 @@ namespace NMUtils {
 
     void MenuItem::drawBorder() {
         SDL_FillRect(surf, &createRect(oX, oY, width, height), getMappedColor(borderNormal));
-        SDL_FillRect(surf, &createRect(oX + borderWidth, oY + borderWidth, width - 2*borderWidth, height - 2*borderWidth), getMappedColor(backgroundNormal));
+        SDL_FillRect(surf, &getBackgroundRect(), getMappedColor(backgroundNormal));
 
     }
 
