@@ -36,6 +36,7 @@ namespace NMUtils {
         //try loading SDL_ttf
         if(!TTF_WasInit() && TTF_Init() == -1) {
             cerr<<"Error initializing SDL_ttf library, cannot draw text. Error: "<<TTF_GetError()<<endl;
+            font = TTF_OpenFont("../data/DejaVuSans.ttf", 12);
         }
     }
 

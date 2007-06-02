@@ -34,6 +34,8 @@ namespace NMUtils {
 
         int width, height, borderWidth;
 
+        TTF_Font * font;
+
         //X and Y offsets set by Constructor 
         //display surface, set by display before calling other display functions
         int oX, oY;
