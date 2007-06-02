@@ -170,6 +170,14 @@ namespace NMUtils {
             height = h;
         };
 
+        int getWidth() {
+            return width;
+        };
+
+        int getHeight() {
+            return height;
+        };
+
         void setFontSize(int size) {
             font = loadFont(fontName, size);
         };
