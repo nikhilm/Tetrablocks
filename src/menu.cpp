@@ -25,15 +25,16 @@ namespace NMUtils {
         setDimensions(300, 75);
         setBorderWidth(5);
 
-        //default red and black theme
-        SDL_Color red = createColor(255, 0, 0);
+        //default white and black theme
+        SDL_Color white = createColor(255, 255, 255);
         SDL_Color black = createColor(0, 0, 0);
-        setForeground(red);
+        SDL_Color red = createColor(255, 0, 0);
+        setForeground(white);
         setBackground(black);
-        setBorder(red);
+        setBorder(white);
 
-        setForegroundHover(black);
-        setBackgroundHover(red);
+        setForegroundHover(red);
+        setBackgroundHover(black);
         setBorderHover(red);
 
 
