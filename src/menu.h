@@ -34,7 +34,8 @@ namespace NMUtils {
 
         int width, height, borderWidth;
 
-        TTF_Font * font;
+        static char * fontName;
+        static TTF_Font * font;
 
         //X and Y offsets set by Constructor 
         //display surface, set by display before calling other display functions
@@ -44,6 +45,8 @@ namespace NMUtils {
         Uint32 getMappedColor(SDL_Color);
 
         SDL_Rect getBackgroundRect();
+
+        static TTF_Font *loadFont(char *, int);
 
     protected:
         void drawBorder();
@@ -110,6 +113,10 @@ namespace NMUtils {
 
         void setHeight(int h) {
             height = h;
+        };
+
+        void setFontSize(int size) {
+            font = loadFont(fontName, size);
         };
     };
 

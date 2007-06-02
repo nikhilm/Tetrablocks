@@ -12,6 +12,9 @@
 #include "menu.h"
 
 namespace NMUtils {
+    char * MenuItem::fontName = "../data/DejaVuSans.ttf";
+    TTF_Font * MenuItem::font = loadFont(MenuItem::fontName, 20);
+    
     MenuItem::MenuItem(int x, int y, char * text, void (*callback)(SDL_Event &)) {
         itemText = text;
         actionCallback = callback;
@@ -33,14 +36,7 @@ namespace NMUtils {
         setBackgroundHover(red);
         setBorderHover(red);
 
-        //try loading SDL_ttf
-        if(!TTF_WasInit() && TTF_Init() == -1) {
-            cerr<<"Error initializing SDL_ttf library, cannot draw text. Error: "<<TTF_GetError()<<endl;
-            font = TTF_OpenFont("../data/DejaVuSans.ttf", 12);
-            if(!font) {
-                cout<<"Error loading font file\n";
-            }
-        }
+
     }
 
     SDL_Color MenuItem::createColor(int r, int g, int b) {
@@ -66,6 +62,19 @@ namespace NMUtils {
 
     Uint32 MenuItem::getMappedColor(SDL_Color col) {
         return SDL_MapRGB(surf->format, col.r, col.g, col.b);
+    }
+
+    TTF_Font * MenuItem::loadFont(char * file, int size) {
+        //try loading SDL_ttf
+        if(!TTF_WasInit() && TTF_Init() == -1) {
+            cerr<<"Error initializing SDL_ttf library, cannot draw text. Error: "<<TTF_GetError()<<endl;
+        }
+
+        TTF_Font *f = TTF_OpenFont(file, size);
+        if(!f) {
+            cout<<"Error loading font file"<<TTF_GetError()<<"\n";
+        }
+        return f;
     }
 
     void MenuItem::setText(char *text) {
@@ -119,11 +128,36 @@ namespace NMUtils {
     void MenuItem::displayNormal() {
         drawBorder();
         SDL_FillRect(surf, &getBackgroundRect(), getMappedColor(backgroundNormal));
+        drawText();
     }
 
     void MenuItem::displayHover() {
         drawBorder();
         SDL_FillRect(surf, &getBackgroundRect(), getMappedColor(backgroundHover));
+        drawText();
+    }
+
+    void MenuItem::drawText() {
+        SDL_Surface * textSurf;
+        if(!(textSurf = TTF_RenderText_Solid(font, itemText, ( currentState == NORMAL ? foregroundNormal : foregroundHover ))))
+            cout<<TTF_GetError();
+
+        //calculate the centre
+        int textSurfWidth = textSurf->w;
+        int textSurfHeight = textSurf->h;
+
+        int thisCenterX = oX + width/2;
+        int thisCenterY = oY + height/2;
+
+        SDL_Rect r;
+        r.x = thisCenterX - textSurfWidth/2;
+        r.y = thisCenterY - textSurfHeight/2;
+        r.w = textSurfWidth;
+        r.h = textSurfHeight;
+
+        SDL_BlitSurface(textSurf, NULL, surf, &r);
+
+        SDL_FreeSurface(textSurf);
     }
 
 };
