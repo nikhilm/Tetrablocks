@@ -175,6 +175,52 @@ namespace NMUtils {
         };
     };
 
+
+    class Menu {
+    private:
+        vector<MenuItem> menuItems;
+        int x, int y;
+
+        int paddingY;
+
+    public:
+        Menu(int X, int Y) {
+            x = X;
+            y = Y;
+            paddingX = 10;
+        };
+
+        void addItem(char * text, void (*callback)(SDL_Event &)) {
+            addItem(0, 0, text, callback);
+        };
+
+        void addItem(MenuItem m) {
+            m.setX(x);
+            menuItems.push_back(m);
+        };
+
+        void removeItem(int index) {
+            if(index < 0 || index >= menuItems.size()) return;
+            
+            menuItems.remove(index);
+        };
+
+        void display(SDL_Surface * surf) {
+            int dispY = y;
+            for(int i = 0; i < menuItems.size(); ++i) {
+                menuItems[i].setY(dispY);
+                menuItems[i].display(surf);
+
+                dispY += menuItems[i].getHeight() + padding;
+            }
+        };
+
+        void handle(SDL_Event & event) {
+            for(int i = 0; i < menuItems.size(); ++i) {
+                menuItems[i].handle(event);
+            }
+        };
+    };
 };
 
 #endif
