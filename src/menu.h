@@ -19,6 +19,49 @@
 using namespace std;
 
 namespace NMUtils {
+    /**
+     * MenuItem is a class implementing a menu item in SDL.
+     * It requires the SDL and SDL_ttf libraries to be installed.
+     *
+     * MenuItem can be used independently or through the Menu class.
+     * MenuItem is quite customisable and allows inheritance to add custom behaviour
+     * such as the use of images or fancy effects.
+     *
+     * Most commonly you will just want to use MenuItem as is, specifying only the text
+     * and the callback.
+     * The callback should be a function with the following prototype
+     * <code>
+     * void <function name>(SDL_Event &)
+     * </code>
+     *
+     * If using MenuItem on its own you should ensure that your event loop passes
+     * all events to its handle() method and that you call MenuItem's display() method.
+     *
+     * Here is an example
+     * <code>
+     * //other includes
+     * #include "menu.h"
+     *
+     * void main() {
+     *     ... initialization code...
+     *     MenuItem item(100, 50, "Click Here", helloWorld);
+     *     
+     *     //begin loop
+     *     while(true) {
+     *     while(SDL_PollEvent(&event)) {
+     *         item.handle(event);
+     *         item2.handle(event);
+     *        
+     *     }
+     *     item.display(screen);
+     *     ... more code...
+     * }
+     * </code>
+     *
+     * To customise the Look 'N' Feel of the MenuItem reimplement the
+     * displayNormal() and displayHover() methods.
+     * Draw on the SDL_Surface surf which is a class member.
+     */         
     class MenuItem {
     private:
 
@@ -49,9 +92,21 @@ namespace NMUtils {
         static TTF_Font *loadFont(char *, int);
 
     protected:
+        /**
+         * Draws the border around the MenuItem
+         */
         void drawBorder();
+        /**
+         * Draws the text
+         */
         void drawText();
+        /**
+         * Draws the menu item in the 'normal' state when the mouse is not over it.
+         */
         void displayNormal();
+        /**
+         * Draws the menu item in the 'hover' state when the mouse is over it.
+         */
         void displayHover();
 
     public:
