@@ -193,7 +193,7 @@ namespace NMUtils {
             if(hsFileWrite.bad())
                 cout<<"Could not open file for writing\n";
             for(int i = 0; i < scoreList.size(); ++i) {
-                cout<<"Writing:"<<scoreList[i];
+                if(limit != -1 && i > limit-1) break;
                 hsFileWrite<<scoreList[i];
             }
             hsFileWrite.close();
