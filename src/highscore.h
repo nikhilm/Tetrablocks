@@ -89,21 +89,25 @@ namespace NMUtils {
      */
     class Highscore {
     private:
-        fstream hsFile;
         vector <Score> scoreList;
+        const char * fileName;
         
         int limit;
 
         void readIntoMemory() {
-            hsFile.seekg(ios::beg);
-            while(!hsFile.eof()) {
-                if(hsFile.eof()) break;
+            ifstream hsFileRead(fileName);
+            if(hsFileRead.bad()) 
+                cout<<"Error opening file for reading\n";
+            hsFileRead.seekg(ios::beg);
+            while(!hsFileRead.eof()) {
+                if(hsFileRead.eof()) break;
                 Score s;
-                hsFile >> s;
+                hsFileRead >> s;
                 scoreList.push_back(s);
             }
             //last entry is empty, remove it
             scoreList.pop_back();
+            hsFileRead.close();
         };
 
     public:
@@ -115,7 +119,7 @@ namespace NMUtils {
          * @param filename The file to read/write to
          */
         Highscore(const char * filename) {
-            hsFile.open(filename);
+            fileName = filename;
             limit = -1;
             readIntoMemory();
         };
@@ -185,32 +189,16 @@ namespace NMUtils {
          * You should call close to commit changes.
          */
         void write() {
-            hsFile.seekp(ios::beg);
-            vector<Score>::iterator it = scoreList.begin();
-            while(it != scoreList.end())
-                hsFile<<s;
+            ofstream hsFileWrite(fileName);
+            if(hsFileWrite.bad())
+                cout<<"Could not open file for writing\n";
+            for(int i = 0; i < scoreList.size(); ++i) {
+                cout<<"Writing:"<<scoreList[i];
+                hsFileWrite<<scoreList[i];
+            }
+            hsFileWrite.close();
         };
 
-        /**
-         * Closes the file.
-         * The Highscore instance will become unusable after this.
-         */
-        void close() {
-            hsFile.close();
-        };
-
-        /**
-         * Returns true if the file opening failed.
-         * You should call bad before attempting operations
-         * on the Highscore if you are unsure about your file's
-         * status.
-         */
-        bool bad() { return hsFile.bad(); };
-
-        ~Highscore() {
-            if(hsFile.is_open())
-                hsFile.close();
-        };
     };
 };
 
