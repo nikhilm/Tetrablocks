@@ -199,6 +199,20 @@ namespace NMUtils {
             paddingY = 10;
         };
 
+        Menu() {
+            x = 0;
+            y = 0;
+            paddingY = 10;
+        };
+
+        void setX(int X) {
+            x = X;
+        };
+
+        void setY(int Y) {
+            y = Y;
+        };
+
         void addItem(char * text, void (*callback)(SDL_Event &)) {
             addItem(MenuItem(0, 0, text, callback));
         };
