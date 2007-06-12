@@ -8,6 +8,7 @@
 #include<iostream>
 
 #include<SDL/SDL_image.h>
+#include "game.h"
 #include "gamegrid.h"
 
 namespace TetraBlocks {

@@ -1,7 +1,7 @@
 CC=g++
 CFLAGS=-g -Wall $(shell sdl-config --cflags)
-LDFLAGS=-g -Wall $(shell sdl-config --libs) -lSDL_image -lSDL_ttf
-INCLUDES=blocks.h piece.h gamegrid.h
+LDFLAGS=$(shell sdl-config --libs) -lSDL_image -lSDL_ttf
+INCLUDES=blocks.h piece.h game.h gamegrid.h
 SOURCES=piece.cpp gamegrid.cpp
 
 PROGRAMS=tetrablocks
@@ -14,7 +14,7 @@ clean:
 	rm -f *.gch
 
 tetrablocks:main.cpp $(INCLUDES) $(SOURCES)
-	$(CC) $(LDFLAGS) $(INCLUDES) $(SOURCES) main.cpp -o tetrablocks
+	$(CC) $(CFLAGS) $(LDFLAGS) $(INCLUDES) $(SOURCES) main.cpp -o tetrablocks
 
 highscores:highscore.h
 	$(CC) test_highscore.cpp highscore.h -o test_highscore
