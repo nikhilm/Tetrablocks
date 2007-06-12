@@ -24,7 +24,7 @@ namespace TetraBlocks {
         //NOTE: DO NOT call this, only used for init
         Block() { image = NULL; }
 
-        Block(SDL_Surface * img) { image = img; x = y = 0; };
+        Block(SDL_Surface * img) { image = img; };
         /**
          * Draws the block.
          * offsetX and offsetY should be absolute coordinates.
