@@ -167,11 +167,11 @@ namespace NMUtils {
         /**
          * Removes the Score where score matches a Score's score.
          */
-        bool removeScore(int score) {
+        void removeScore(int score) {
             return removeScore(Score(score, ""));
         };
 
-        bool removeScore(Score score) {
+        void removeScore(Score score) {
             vector<Score>::iterator it = find(scoreList.begin(), scoreList.end(), score);
             cout<<*scoreList.erase(it);
         };
@@ -192,7 +192,7 @@ namespace NMUtils {
             ofstream hsFileWrite(fileName);
             if(hsFileWrite.bad())
                 cout<<"Could not open file for writing\n";
-            for(int i = 0; i < scoreList.size(); ++i) {
+            for(unsigned int i = 0; i < scoreList.size(); ++i) {
                 if(limit != -1 && i > limit-1) break;
                 hsFileWrite<<scoreList[i];
             }
