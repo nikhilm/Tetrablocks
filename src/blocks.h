@@ -20,7 +20,6 @@ namespace TetraBlocks {
 
     public:
         enum {WIDTH = 20, HEIGHT = 20};
-        int x, y;
         
         //NOTE: DO NOT call this, only used for init
         Block() { image = NULL; }
@@ -33,8 +32,8 @@ namespace TetraBlocks {
          */
         void display(int offsetX, int offsetY, SDL_Surface * screen) {
             SDL_Rect r;
-            r.x = offsetX + x*WIDTH;
-            r.y = offsetY + y*HEIGHT;
+            r.x = offsetX;
+            r.y = offsetY;
             //std::cout<<"Drawing at ("<<r.x<<", "<<r.y<<")\n";
             SDL_BlitSurface(image, NULL, screen, &r);
         }
