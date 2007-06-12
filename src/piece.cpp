@@ -197,21 +197,12 @@ namespace TetraBlocks {
                 layout[i][j] = NULL;
                 if(shapeMap[currentOrientation][i][j] == 1) {
                     layout[i][j] = new Block(colour);
-                    layout[i][j]->x = x+j;
-                    layout[i][j]->y = y+i;
                 }
             }
         }
     }
     
     void Piece::moveDown() {
-        for(int i = 0; i < PIECE_SIZE; ++i) {
-            for(int j = 0; j < PIECE_SIZE; ++j) {
-                if(layout[i][j] != NULL) {
-                    layout[i][j]->y++;
-                }
-            }
-        }
         y++;
     }
 
@@ -220,8 +211,8 @@ namespace TetraBlocks {
         for(int i = 0; i < PIECE_SIZE; ++i) {
             for(int j = 0; j < PIECE_SIZE; ++j) {
                 if(layout[i][j] != NULL) {
-                    if(layout[i][j]->x < bound)
-                        bound = layout[i][j]->x;
+                    if(i < bound)
+                        bound = i;
                 }
             }
         }
@@ -233,8 +224,8 @@ namespace TetraBlocks {
         for(int i = 0; i < PIECE_SIZE; ++i) {
             for(int j = 0; j < PIECE_SIZE; ++j) {
                 if(layout[i][j] != NULL) {
-                    if(layout[i][j]->x > bound)
-                        bound = layout[i][j]->x;
+                    if(i > bound)
+                        bound = i;
                 }
             }
         }
@@ -243,14 +234,6 @@ namespace TetraBlocks {
 
     //handles updating coordinates of piece and its blocks
     void Piece::movePiece(int deltaX, int deltaY) {
-        for(int i = 0; i < PIECE_SIZE; ++i) {
-            for(int j = 0; j < PIECE_SIZE; ++j) {
-                if(layout[i][j] != NULL) {
-                    layout[i][j]->x += deltaX; 
-                    layout[i][j]->y += deltaY; 
-                }
-            }
-        }
         x += deltaX;
         y += deltaY;
     }
@@ -286,7 +269,7 @@ namespace TetraBlocks {
         for(int i = 0; i < PIECE_SIZE; ++i) {
             for(int j = 0; j < PIECE_SIZE; ++j) {
                 if(layout[i][j] != NULL) {
-                    layout[i][j]->display(offsetX, offsetY, screen);
+                    layout[i][j]->display(offsetX + i * Block::WIDTH, offsetY + j * Block::HEIGHT, screen);
                 }
             }
         }
