@@ -11,10 +11,7 @@
 #include "gamegrid.h"
 
 namespace TetraBlocks {
-    State* GameGrid::nextState() {
-        return 0;
-    }
-    bool GameGrid::init() {
+    bool GameGrid::init(const Game * game) {
         for(int i = 0; i < GRID_HEIGHT; ++i) {
             for(int j = 0; j < GRID_WIDTH; ++j) {
                 grid[i][j] = NULL;
@@ -23,10 +20,12 @@ namespace TetraBlocks {
         currentPiece = Piece::createRandomPiece(START_X, START_Y);
         moveDownTime = SDL_GetTicks();
         downTime = DEFAULT_DOWNTIME;
+
+        gameRef = game;
         
         return true;
     }
-    SDL_Rect * GameGrid::display(SDL_Surface * screen) { 
+    void GameGrid::display(SDL_Surface * screen) { 
         drawGridOutline(screen);
         for(int i = 0; i < GRID_HEIGHT; ++i) {
             for(int j = 0; j < GRID_WIDTH; ++j) {
@@ -35,11 +34,9 @@ namespace TetraBlocks {
             }
         }
         currentPiece->display(LEFT, TOP, screen);
-        return 0;
     }
 
-    bool GameGrid::update(Game * game) { 
-
+    bool GameGrid::update() { 
         Uint32 now = SDL_GetTicks();
         if(now >= moveDownTime) {
             //currentPiece->moveDown();

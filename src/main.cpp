@@ -10,7 +10,6 @@
 
 #include<SDL/SDL.h>
 
-#include "state.h"
 #include "gamegrid.h"
 
 namespace TetraBlocks {
@@ -18,7 +17,7 @@ namespace TetraBlocks {
     private:
         SDL_Surface * screen;
         bool programRunning;
-        State * currentState;
+        GameGrid *gameGrid;
 
     public:
         Game() {
@@ -43,8 +42,8 @@ namespace TetraBlocks {
             r.h = screen->h;
             SDL_FillRect(screen, &r, SDL_MapRGB(screen->format, 0, 0, 0));
 
-            currentState = new GameGrid();
-            currentState->init();
+            gameGrid = new GameGrid();
+            gameGrid->init(this);
             
             gameLoop();
         }
@@ -57,11 +56,11 @@ namespace TetraBlocks {
                     if(SDL_QUIT == event.type) programRunning = false;
                     if(SDL_KEYDOWN == event.type && SDLK_ESCAPE == event.key.keysym.sym) programRunning = false;
 
-                    currentState->handle(event);
+                    gameGrid->handle(event);
                 }
 
-                currentState->update(this);
-                SDL_Rect * updates = currentState->display(screen);
+                gameGrid->update();
+                gameGrid->display(screen);
                 SDL_Flip(screen);
             }
         }
