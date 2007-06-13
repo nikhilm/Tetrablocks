@@ -47,6 +47,10 @@ namespace TetraBlocks {
 
         // TODO: check piece position
         //for now just bottom
+        if( currentPiece->bottomCollision() ) {
+            std::cout<<"Collision with bottom\n";
+            currentPiece = Piece::createRandomPiece(START_X, START_Y);
+        }
         return true; 
     }
     void GameGrid::handle(SDL_Event &event) {

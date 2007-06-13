@@ -232,6 +232,23 @@ namespace TetraBlocks {
         return bound;
     }
 
+    int Piece::getBottomBound() {
+        int bound = 0;
+        for(int i = 0; i < PIECE_SIZE; ++i) {
+            for(int j = 0; j < PIECE_SIZE; ++j) {
+                if(layout[i][j] != NULL) {
+                    if(j > bound)
+                        bound = j;
+                }
+            }
+        }
+        return bound+y;
+    }
+
+    bool Piece::bottomCollision() {
+        return getBottomBound() >= GameGrid::GRID_HEIGHT;
+    }
+
     //handles updating coordinates of piece and its blocks
     void Piece::movePiece(int deltaX, int deltaY) {
         x += deltaX;

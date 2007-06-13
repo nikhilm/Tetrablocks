@@ -43,11 +43,15 @@ namespace TetraBlocks {
             short currentOrientation;
             
             Piece(int, int, int, SDL_Surface * );
-            void moveSideways(int);
+
+            //bound related functions
             int getLeftBound();
             int getRightBound();
+            int getBottomBound();
 
+            //moving functions
             void movePiece(int, int);
+            void moveSideways(int);
 
             void setNextOrientation();
             
@@ -75,6 +79,8 @@ namespace TetraBlocks {
 
             int getX() { return x; };
             int getY() { return y; };
+
+            bool bottomCollision();
 
     }; // class Piece
 }; //namespace TetraBlocks
