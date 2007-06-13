@@ -44,6 +44,9 @@ namespace TetraBlocks {
             downTime -= 100;
             moveDownTime = SDL_GetTicks() + downTime;
         }
+
+        // TODO: check piece position
+        //for now just bottom
         return true; 
     }
     void GameGrid::handle(SDL_Event &event) {

@@ -73,6 +73,9 @@ namespace TetraBlocks {
 
             void handle(SDL_Event &);
 
+            int getX() { return x; };
+            int getY() { return y; };
+
     }; // class Piece
 }; //namespace TetraBlocks
 #endif
