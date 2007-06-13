@@ -50,6 +50,7 @@ namespace TetraBlocks {
         if( currentPiece->bottomCollision() ) {
             std::cout<<"Collision with bottom\n";
             currentPiece = Piece::createRandomPiece(START_X, START_Y);
+            downTime = DEFAULT_DOWNTIME;
         }
         return true; 
     }
