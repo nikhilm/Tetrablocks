@@ -61,7 +61,7 @@ namespace TetraBlocks {
             // this should not be used.
             // instead use the cached surfaces stored in the array
             static SDL_Surface * genImageSurface(char * colour) {
-                std::string path = "../images/block_";
+                std::string path = "../data/images/block_";
                 path += colour;
                 path += ".png";
                 return IMG_Load(path.c_str());

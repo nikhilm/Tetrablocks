@@ -34,7 +34,6 @@ namespace TetraBlocks {
             SDL_Rect r;
             r.x = offsetX;
             r.y = offsetY;
-            //std::cout<<"Drawing at ("<<r.x<<", "<<r.y<<")\n";
             SDL_BlitSurface(image, NULL, screen, &r);
         }
     };

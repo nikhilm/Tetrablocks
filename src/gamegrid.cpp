@@ -40,7 +40,7 @@ namespace TetraBlocks {
     bool GameGrid::update() { 
         Uint32 now = SDL_GetTicks();
         if(now >= moveDownTime) {
-            //currentPiece->moveDown();
+            currentPiece->moveDown();
             downTime -= 100;
             moveDownTime = SDL_GetTicks() + downTime;
         }
