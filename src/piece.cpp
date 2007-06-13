@@ -269,7 +269,7 @@ namespace TetraBlocks {
         for(int i = 0; i < PIECE_SIZE; ++i) {
             for(int j = 0; j < PIECE_SIZE; ++j) {
                 if(layout[i][j] != NULL) {
-                    layout[i][j]->display(offsetX + i * Block::WIDTH, offsetY + j * Block::HEIGHT, screen);
+                    layout[i][j]->display(offsetX + x*Block::WIDTH + i * Block::WIDTH, offsetY + y*Block::HEIGHT + j * Block::HEIGHT, screen);
                 }
             }
         }
