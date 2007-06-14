@@ -49,6 +49,12 @@ namespace TetraBlocks {
         //for now just bottom
         if( currentPiece->bottomCollision() ) {
             std::cout<<"Collision with bottom\n";
+            for(int i = 0; i < Piece::PIECE_SIZE; ++i)
+                for( int j = 0; j < Piece::PIECE_SIZE; ++j)
+                    if(currentPiece->layout[i][j] != NULL)
+                        grid[currentPiece->getX() + i][currentPiece->getY() + j] = currentPiece->layout[i][j];
+
+            delete currentPiece;
             currentPiece = Piece::createRandomPiece(START_X, START_Y);
             downTime = DEFAULT_DOWNTIME;
         }

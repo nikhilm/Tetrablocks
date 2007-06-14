@@ -18,44 +18,13 @@
 #include "blocks.h"
 
 namespace TetraBlocks {
+    class GameGrid;
     class Piece {
-        private:
+        public:
             //height, width in block terms
             enum { PIECE_SIZE = 4, NB_PIECES=7, NB_ROTATIONS=4};
-            
-            /**************************************************
-             * SHAPES LAYOUT DESCRIPTION BEGINS               *
-             * Their are 7 shapes. Each shape has 4 positions.*
-             * Each position is represented by a 4x4 array    *
-             *************************************************/
-            static int SHAPES[NB_PIECES][NB_ROTATIONS][PIECE_SIZE][PIECE_SIZE];
-            
-            
-            static SDL_Surface * COLOURS[NB_PIECES];
-            
-            
             Block * layout[PIECE_SIZE][PIECE_SIZE];
-            int x, y;
 
-            SDL_Surface * colour;
-            int shapeMap[NB_ROTATIONS][PIECE_SIZE][PIECE_SIZE];
-
-            short currentOrientation;
-            
-            Piece(int, int, int, SDL_Surface * );
-
-            //bound related functions
-            int getLeftBound();
-            int getRightBound();
-            int getBottomBound();
-
-            //moving functions
-            void movePiece(int, int);
-            void moveSideways(int);
-
-            void setNextOrientation();
-            
-        public:
             static  Piece * createRandomPiece(int x, int y) {
                 int index = rand()%NB_PIECES;
                 return new Piece(x, y, index, COLOURS[index]);
@@ -82,6 +51,39 @@ namespace TetraBlocks {
 
             bool bottomCollision();
 
+        private:
+            
+            /**************************************************
+             * SHAPES LAYOUT DESCRIPTION BEGINS               *
+             * Their are 7 shapes. Each shape has 4 positions.*
+             * Each position is represented by a 4x4 array    *
+             *************************************************/
+            static int SHAPES[NB_PIECES][NB_ROTATIONS][PIECE_SIZE][PIECE_SIZE];
+            
+            
+            static SDL_Surface * COLOURS[NB_PIECES];
+            
+            
+            int x, y;
+
+            SDL_Surface * colour;
+            int shapeMap[NB_ROTATIONS][PIECE_SIZE][PIECE_SIZE];
+
+            short currentOrientation;
+            
+            Piece(int, int, int, SDL_Surface * );
+
+            //bound related functions
+            int getLeftBound();
+            int getRightBound();
+            int getBottomBound();
+
+            //moving functions
+            void movePiece(int, int);
+            void moveSideways(int);
+
+            void setNextOrientation();
+            
     }; // class Piece
 }; //namespace TetraBlocks
 #endif
