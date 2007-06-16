@@ -26,12 +26,13 @@ namespace TetraBlocks {
         
         return true;
     }
+
     void GameGrid::display(SDL_Surface * screen) { 
         drawGridOutline(screen);
         for(int i = 0; i < GRID_HEIGHT; ++i) {
             for(int j = 0; j < GRID_WIDTH; ++j) {
                 if(grid[i][j] != NULL)
-                    grid[i][j]->display(LEFT, TOP, screen);
+                    grid[i][j]->display(LEFT+j*Block::WIDTH, TOP+i*Block::HEIGHT, screen);
             }
         }
         currentPiece->display(LEFT, TOP, screen);
@@ -48,13 +49,9 @@ namespace TetraBlocks {
         // TODO: check piece position
         //for now just bottom
         if( currentPiece->bottomCollision() ) {
-            std::cout<<"Collision with bottom\n";
-            for(int i = 0; i < Piece::PIECE_SIZE; ++i)
-                for( int j = 0; j < Piece::PIECE_SIZE; ++j)
-                    if(currentPiece->layout[i][j] != NULL)
-                        grid[currentPiece->getX() + i][currentPiece->getY() + j] = currentPiece->layout[i][j];
-
-            delete currentPiece;
+            std::cout<<"Detected collision\n";
+            currentPiece->releaseBlocksToGrid(this);
+            std::cout<<"Finished release\n";
             currentPiece = Piece::createRandomPiece(START_X, START_Y);
             downTime = DEFAULT_DOWNTIME;
         }
@@ -89,6 +86,10 @@ namespace TetraBlocks {
         r.h-=2;
         SDL_FillRect(screen, &r, SDL_MapRGB(screen->format, 0, 0, 0));
 
+    }
+
+    void GameGrid::acceptBlock(int x, int y, Block * block) {
+        grid[y][x] = block;
     }
 };
 

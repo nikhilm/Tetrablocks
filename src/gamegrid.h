@@ -39,6 +39,7 @@ namespace TetraBlocks {
         void display(SDL_Surface * screen);
         bool update();
         void handle(SDL_Event &event);
+        void acceptBlock(int, int, Block*);
     };
 };
         

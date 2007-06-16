@@ -51,6 +51,8 @@ namespace TetraBlocks {
 
             bool bottomCollision();
 
+            void releaseBlocksToGrid(GameGrid *);
+
         private:
             
             /**************************************************

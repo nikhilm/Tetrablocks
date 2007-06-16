@@ -211,8 +211,8 @@ namespace TetraBlocks {
         for(int i = 0; i < PIECE_SIZE; ++i) {
             for(int j = 0; j < PIECE_SIZE; ++j) {
                 if(layout[i][j] != NULL) {
-                    if(i < bound)
-                        bound = i;
+                    if(j < bound)
+                        bound = j;
                 }
             }
         }
@@ -224,8 +224,8 @@ namespace TetraBlocks {
         for(int i = 0; i < PIECE_SIZE; ++i) {
             for(int j = 0; j < PIECE_SIZE; ++j) {
                 if(layout[i][j] != NULL) {
-                    if(i > bound)
-                        bound = i;
+                    if(j > bound)
+                        bound = j;
                 }
             }
         }
@@ -237,12 +237,12 @@ namespace TetraBlocks {
         for(int i = 0; i < PIECE_SIZE; ++i) {
             for(int j = 0; j < PIECE_SIZE; ++j) {
                 if(layout[i][j] != NULL) {
-                    if(j > bound)
-                        bound = j;
+                    if(i > bound)
+                        bound = i;
                 }
             }
         }
-        return bound+y;
+        return bound+y-1;
     }
 
     bool Piece::bottomCollision() {
@@ -286,10 +286,17 @@ namespace TetraBlocks {
         for(int i = 0; i < PIECE_SIZE; ++i) {
             for(int j = 0; j < PIECE_SIZE; ++j) {
                 if(layout[i][j] != NULL) {
-                    layout[i][j]->display(offsetX + x*Block::WIDTH + i * Block::WIDTH, offsetY + y*Block::HEIGHT + j * Block::HEIGHT, screen);
+                    layout[i][j]->display(offsetX + x*Block::WIDTH + j * Block::WIDTH, offsetY + y*Block::HEIGHT + i * Block::HEIGHT, screen);
                 }
             }
         }
+    }
+
+    void Piece::releaseBlocksToGrid(GameGrid *ggrid) {
+        for(int i = 0; i < PIECE_SIZE; ++i)
+            for(int j = 0; j < PIECE_SIZE; ++j)
+                if(layout[i][j] != NULL)
+                    ggrid->acceptBlock(x+j, y+i, layout[i][j]);
     }
 }
             
