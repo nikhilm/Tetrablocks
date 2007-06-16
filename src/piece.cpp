@@ -242,11 +242,11 @@ namespace TetraBlocks {
                 }
             }
         }
-        return bound+y-1;
+        return bound+y;
     }
 
     bool Piece::bottomCollision() {
-        return getBottomBound() >= GameGrid::GRID_HEIGHT;
+        return getBottomBound()+1 >= GameGrid::GRID_HEIGHT;
     }
 
     //handles updating coordinates of piece and its blocks
@@ -286,7 +286,8 @@ namespace TetraBlocks {
         for(int i = 0; i < PIECE_SIZE; ++i) {
             for(int j = 0; j < PIECE_SIZE; ++j) {
                 if(layout[i][j] != NULL) {
-                    layout[i][j]->display(offsetX + x*Block::WIDTH + j * Block::WIDTH, offsetY + y*Block::HEIGHT + i * Block::HEIGHT, screen);
+                    //std::cout<<"Drawing block at logical coordinates ("<<x+j<<", "<<y+i<<")\n";
+                    layout[i][j]->display(offsetX + (x+j)*Block::WIDTH, offsetY + (y+i)*Block::HEIGHT, screen);
                 }
             }
         }

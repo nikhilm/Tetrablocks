@@ -39,13 +39,6 @@ namespace TetraBlocks {
     }
 
     bool GameGrid::update() { 
-        Uint32 now = SDL_GetTicks();
-        if(now >= moveDownTime) {
-            currentPiece->moveDown();
-            downTime -= 100;
-            moveDownTime = SDL_GetTicks() + downTime;
-        }
-
         // TODO: check piece position
         //for now just bottom
         if( currentPiece->bottomCollision() ) {
@@ -55,6 +48,14 @@ namespace TetraBlocks {
             currentPiece = Piece::createRandomPiece(START_X, START_Y);
             downTime = DEFAULT_DOWNTIME;
         }
+
+        Uint32 now = SDL_GetTicks();
+        if(now >= moveDownTime) {
+            //currentPiece->moveDown();
+            //downTime -= 100;
+            moveDownTime = SDL_GetTicks() + downTime;
+        }
+
         return true; 
     }
     void GameGrid::handle(SDL_Event &event) {
