@@ -216,7 +216,7 @@ namespace TetraBlocks {
                 }
             }
         }
-        return bound;
+        return bound+x;
     }
 
     int Piece::getRightBound() {
@@ -229,7 +229,7 @@ namespace TetraBlocks {
                 }
             }
         }
-        return bound;
+        return bound+x;
     }
 
     int Piece::getBottomBound() {
