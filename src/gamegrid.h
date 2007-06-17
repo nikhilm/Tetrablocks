@@ -33,6 +33,8 @@ namespace TetraBlocks {
 
         const Game * gameRef;
 
+        void printMap();
+
 
     public:
         bool init(const Game *);
