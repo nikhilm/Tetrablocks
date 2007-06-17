@@ -204,7 +204,7 @@ namespace TetraBlocks {
     }
     
     void Piece::moveDown() {
-        y++;
+        if(checkMovement(0, 1)) movePiece(0, 1);
     }
 
     int Piece::getLeftBound() {
@@ -256,12 +256,27 @@ namespace TetraBlocks {
         y += deltaY;
     }
 
+    bool Piece::checkMovement(int dx, int dy) {
+        bool mayMove = false;
+        for(int i = 0; i < PIECE_SIZE; ++i) {
+            for(int j = 0; j < PIECE_SIZE; ++j) {
+                if(layout[i][j] != NULL) {
+                    if(ggrid->mayPlace(x+j+dx, y+i+dy))
+                        mayMove = true;
+                    else
+                        mayMove = false;
+                }
+            }
+        }
+        return mayMove;
+    }
+
     // moves all blocks left if number is -ve, right if +ve
     void Piece::moveSideways(int side) {
-        if( side < 0 && getLeftBound() > 0 ) {
+        if( side < 0 && getLeftBound() > 0 && checkMovement(-1, 0)) {
             movePiece(-1, 0);
         }
-        else if( side > 0 && getRightBound() < GameGrid::GRID_WIDTH - 1 ) {
+        else if( side > 0 && getRightBound() < GameGrid::GRID_WIDTH - 1 && checkMovement(1, 0)) {
             movePiece(1, 0);
         }
     }

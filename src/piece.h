@@ -86,6 +86,8 @@ namespace TetraBlocks {
             void moveSideways(int);
 
             void setNextOrientation();
+
+            bool checkMovement(int, int);
             
     }; // class Piece
 }; //namespace TetraBlocks

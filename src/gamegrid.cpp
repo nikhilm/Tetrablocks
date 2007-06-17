@@ -94,6 +94,7 @@ namespace TetraBlocks {
     }
 
     bool GameGrid::mayPlace(int x, int y) {
+        std::cout<<"Checking for placement at "<<x<<", "<<y<<std::endl;
         return grid[y][x] == NULL;
     }
 };
