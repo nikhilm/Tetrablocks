@@ -92,5 +92,9 @@ namespace TetraBlocks {
     void GameGrid::acceptBlock(int x, int y, Block * block) {
         grid[y][x] = block;
     }
+
+    bool GameGrid::mayPlace(int x, int y) {
+        return grid[y][x] == NULL;
+    }
 };
 

@@ -40,6 +40,7 @@ namespace TetraBlocks {
         bool update();
         void handle(SDL_Event &event);
         void acceptBlock(int, int, Block*);
+        bool mayPlace(int, int);
     };
 };
         
