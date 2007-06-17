@@ -18,7 +18,7 @@ namespace TetraBlocks {
                 grid[i][j] = NULL;
             }
         }
-        currentPiece = Piece::createRandomPiece(START_X, START_Y);
+        currentPiece = Piece::createRandomPiece(START_X, START_Y, this);
         moveDownTime = SDL_GetTicks();
         downTime = DEFAULT_DOWNTIME;
 
@@ -43,9 +43,9 @@ namespace TetraBlocks {
         //for now just bottom
         if( currentPiece->bottomCollision() ) {
             std::cout<<"Detected collision\n";
-            currentPiece->releaseBlocksToGrid(this);
+            currentPiece->releaseBlocksToGrid();
             std::cout<<"Finished release\n";
-            currentPiece = Piece::createRandomPiece(START_X, START_Y);
+            currentPiece = Piece::createRandomPiece(START_X, START_Y, this);
             downTime = DEFAULT_DOWNTIME;
         }
 
@@ -63,7 +63,7 @@ namespace TetraBlocks {
         if(event.type == SDL_KEYDOWN) {
            switch(event.key.keysym.sym) {
                case SDLK_SPACE:
-                   currentPiece = Piece::createRandomPiece(START_X, START_Y);
+                   currentPiece = Piece::createRandomPiece(START_X, START_Y, this);
                    downTime = DEFAULT_DOWNTIME;
                    break;
                case SDLK_DOWN:

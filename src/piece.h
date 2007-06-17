@@ -25,9 +25,9 @@ namespace TetraBlocks {
             enum { PIECE_SIZE = 4, NB_PIECES=7, NB_ROTATIONS=4};
             Block * layout[PIECE_SIZE][PIECE_SIZE];
 
-            static  Piece * createRandomPiece(int x, int y) {
+            static  Piece * createRandomPiece(int x, int y, GameGrid *g) {
                 int index = rand()%NB_PIECES;
-                return new Piece(x, y, index, COLOURS[index]);
+                return new Piece(x, y, index, COLOURS[index], g);
             };
             
             // NOTE: Called only by colours array to load images
@@ -51,9 +51,10 @@ namespace TetraBlocks {
 
             bool bottomCollision();
 
-            void releaseBlocksToGrid(GameGrid *);
+            void releaseBlocksToGrid();
 
         private:
+            GameGrid * ggrid;
             
             /**************************************************
              * SHAPES LAYOUT DESCRIPTION BEGINS               *
@@ -73,7 +74,7 @@ namespace TetraBlocks {
 
             short currentOrientation;
             
-            Piece(int, int, int, SDL_Surface * );
+            Piece(int, int, int, SDL_Surface * , GameGrid *);
 
             //bound related functions
             int getLeftBound();

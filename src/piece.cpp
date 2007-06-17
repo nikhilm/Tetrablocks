@@ -177,7 +177,7 @@ namespace TetraBlocks {
         genImageSurface("orange")
     };
     
-    Piece::Piece(int X, int Y, int shapeIndex, SDL_Surface * col) {
+    Piece::Piece(int X, int Y, int shapeIndex, SDL_Surface * col, GameGrid * g) {
         for(int k = 0; k < NB_ROTATIONS; ++k)
             for(int i = 0; i < PIECE_SIZE; ++i)
                 for(int j = 0; j < PIECE_SIZE; ++j) {
@@ -187,6 +187,7 @@ namespace TetraBlocks {
         currentOrientation = -1;
         x = X;
         y = Y;
+        ggrid = g;
         setNextOrientation();
     };
 
@@ -293,7 +294,7 @@ namespace TetraBlocks {
         }
     }
 
-    void Piece::releaseBlocksToGrid(GameGrid *ggrid) {
+    void Piece::releaseBlocksToGrid() {
         for(int i = 0; i < PIECE_SIZE; ++i)
             for(int j = 0; j < PIECE_SIZE; ++j)
                 if(layout[i][j] != NULL)
