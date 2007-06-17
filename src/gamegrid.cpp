@@ -43,15 +43,12 @@ namespace TetraBlocks {
         //for now just bottom
         if( currentPiece->bottomCollision() ) {
             std::cout<<"Detected collision\n";
-            currentPiece->releaseBlocksToGrid();
-            std::cout<<"Finished release\n";
-            currentPiece = Piece::createRandomPiece(START_X, START_Y, this);
-            downTime = DEFAULT_DOWNTIME;
+            lockPiece();
         }
 
         Uint32 now = SDL_GetTicks();
         if(now >= moveDownTime) {
-            //currentPiece->moveDown();
+            currentPiece->moveDown();
             //downTime -= 100;
             moveDownTime = SDL_GetTicks() + downTime;
         }
@@ -96,6 +93,12 @@ namespace TetraBlocks {
     bool GameGrid::mayPlace(int x, int y) {
         std::cout<<"Checking for placement at "<<x<<", "<<y<<std::endl;
         return grid[y][x] == NULL;
+    }
+
+    void GameGrid::lockPiece() {
+        currentPiece->releaseBlocksToGrid();
+        currentPiece = Piece::createRandomPiece(START_X, START_Y, this);
+        downTime = DEFAULT_DOWNTIME;
     }
 };
 

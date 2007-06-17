@@ -41,6 +41,7 @@ namespace TetraBlocks {
         void handle(SDL_Event &event);
         void acceptBlock(int, int, Block*);
         bool mayPlace(int, int);
+        void lockPiece();
     };
 };
         

@@ -205,6 +205,7 @@ namespace TetraBlocks {
     
     void Piece::moveDown() {
         if(checkMovement(0, 1)) movePiece(0, 1);
+        else ggrid->lockPiece();
     }
 
     int Piece::getLeftBound() {
