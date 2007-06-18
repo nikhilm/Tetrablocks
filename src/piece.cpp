@@ -223,13 +223,22 @@ namespace TetraBlocks {
         setNextOrientation();
     };
 
+    //rotates the piece anticlockwise
     void Piece::setNextOrientation() {
+        bool placementSuccessful = false;
         Block * copy[PIECE_SIZE][PIECE_SIZE];
         for(int i = 0; i < PIECE_SIZE; ++i) {
             for(int j = 0; j < PIECE_SIZE; ++j)
-                copy[PIECE_SIZE-1-j][i] = layout[i][j];
+                if(ggrid->mayPlace(i, PIECE_SIZE-1-j)) {
+                    copy[PIECE_SIZE-1-j][i] = layout[i][j];
+                    placementSuccessful = true;
+                }
+                else
+                    placementSuccessful = false;
         }
 
+        if(!placementSuccessful)
+            return;
         for(int i = 0; i < PIECE_SIZE; ++i) {
             for(int j = 0; j < PIECE_SIZE; ++j)
                 layout[i][j] = copy[i][j];
