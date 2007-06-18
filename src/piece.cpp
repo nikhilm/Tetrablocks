@@ -10,12 +10,45 @@
 #include "piece.h"
 
 namespace TetraBlocks {
-     int Piece::SHAPES[NB_PIECES][NB_ROTATIONS][PIECE_SIZE][PIECE_SIZE] = {
-        // I shape
-        {{{0, 1, 0, 0},
+     int Piece::SHAPES[NB_PIECES][PIECE_SIZE][PIECE_SIZE] = {
+         // I shape
+         {{0, 1, 0, 0},
           {0, 1, 0, 0},
           {0, 1, 0, 0},
           {0, 1, 0, 0}},
+
+         {{0, 1, 1, 1},
+          {0, 0, 0, 1},
+          {0, 0, 0, 0},
+          {0, 0, 0, 0}},
+
+         {{1, 1, 1, 0},
+          {1, 0, 0, 0},
+          {0, 0, 0, 0},
+          {0, 0, 0, 0}},
+
+         {{0, 0, 0, 0},
+          {0, 1, 1, 0},
+          {0, 1, 1, 0},
+          {0, 0, 0, 0}},
+
+         {{0, 0, 1, 1},
+          {0, 1, 1, 0},
+          {0, 0, 0, 0},
+          {0, 0, 0, 0}},
+
+         {{0, 1, 1, 1},
+          {0, 0, 1, 0},
+          {0, 0, 0, 0},
+          {0, 0, 0, 0}},
+
+         {{1, 1, 0, 0},
+          {0, 1, 1, 0},
+          {0, 0, 0, 0},
+          {0, 0, 0, 0}}
+     };
+     /*int Piece::SHAPES[NB_PIECES][NB_ROTATIONS][PIECE_SIZE][PIECE_SIZE] = {
+        // I shape
         
          {{0, 0, 0, 0},
           {1, 1, 1, 1},
@@ -158,7 +191,7 @@ namespace TetraBlocks {
           {1, 1, 0, 0},
           {1, 0, 0, 0},
           {0, 0, 0, 0}}}
-    };
+    };*/
     
      SDL_Surface * Piece::COLOURS[NB_PIECES] = {
         // I = red
@@ -178,13 +211,12 @@ namespace TetraBlocks {
     };
     
     Piece::Piece(int X, int Y, int shapeIndex, SDL_Surface * col, GameGrid * g) {
-        for(int k = 0; k < NB_ROTATIONS; ++k)
+        //for(int k = 0; k < NB_ROTATIONS; ++k)
             for(int i = 0; i < PIECE_SIZE; ++i)
                 for(int j = 0; j < PIECE_SIZE; ++j) {
-                    shapeMap[k][i][j] = Piece::SHAPES[shapeIndex][k][i][j];
+                    if(Piece::SHAPES[shapeIndex][i][j] == 1)
+                        layout[i][j] = new Block(col);
                 }
-        colour = col;
-        currentOrientation = -1;
         x = X;
         y = Y;
         ggrid = g;
@@ -192,15 +224,26 @@ namespace TetraBlocks {
     };
 
     void Piece::setNextOrientation() {
-        currentOrientation = (currentOrientation + 1)%NB_ROTATIONS;
+        Block * copy[PIECE_SIZE][PIECE_SIZE];
         for(int i = 0; i < PIECE_SIZE; ++i) {
-            for(int j = 0; j < PIECE_SIZE; ++j) {
-                layout[i][j] = NULL;
-                if(shapeMap[currentOrientation][i][j] == 1) {
-                    layout[i][j] = new Block(colour);
-                }
-            }
+            for(int j = 0; j < PIECE_SIZE; ++j)
+                copy[PIECE_SIZE-1-j][i] = layout[i][j];
         }
+
+        for(int i = 0; i < PIECE_SIZE; ++i) {
+            for(int j = 0; j < PIECE_SIZE; ++j)
+                layout[i][j] = copy[i][j];
+        }
+
+        //currentOrientation = (currentOrientation + 1)%NB_ROTATIONS;
+        //for(int i = 0; i < PIECE_SIZE; ++i) {
+        //    for(int j = 0; j < PIECE_SIZE; ++j) {
+        //        layout[i][j] = NULL;
+        //        if(shapeMap[currentOrientation][i][j] == 1) {
+        //            layout[i][j] = new Block(colour);
+        //        }
+        //    }
+        //}
     }
     
     void Piece::moveDown() {

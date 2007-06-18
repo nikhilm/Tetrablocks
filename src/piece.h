@@ -61,7 +61,7 @@ namespace TetraBlocks {
              * Their are 7 shapes. Each shape has 4 positions.*
              * Each position is represented by a 4x4 array    *
              *************************************************/
-            static int SHAPES[NB_PIECES][NB_ROTATIONS][PIECE_SIZE][PIECE_SIZE];
+            static int SHAPES[NB_PIECES][PIECE_SIZE][PIECE_SIZE];
             
             
             static SDL_Surface * COLOURS[NB_PIECES];
