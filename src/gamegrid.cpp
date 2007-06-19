@@ -86,6 +86,40 @@ namespace TetraBlocks {
 
     }
 
+    void GameGrid::checkLines() {
+        //for each line, if all places are empty, increment line count
+        // also mark topmost position. remove all lines from there to line count
+        // downwards. then move all blocks above topmost position down by line count
+        // if line completely empty then stop checking, since lines above it are empty too
+        
+        int lineCount = 0;
+        int topPosition = GRID_HEIGHT - 1;
+
+
+        for(int i = GRID_HEIGHT-1; i >= 0; --i) {
+            bool lineFull = true;
+            bool lineTotallyEmpty = true;
+            for(int j = 0; j < GRID_WIDTH; ++j) {
+                if(grid[i][j] != NULL)
+                    lineTotallyEmpty = false;
+                    
+                if(grid[i][j] == NULL)
+                    lineFull = false;
+            }
+            if(lineFull) {
+                lineCount++;
+                topPosition = i;
+            }
+
+            if(lineTotallyEmpty)
+                break;
+                
+        }
+
+        for(int k = 0; k = topPosition
+
+
+
     void GameGrid::acceptBlock(int x, int y, Block * block) {
         grid[y][x] = block;
     }
@@ -98,6 +132,7 @@ namespace TetraBlocks {
         currentPiece->releaseBlocksToGrid();
         currentPiece = Piece::createRandomPiece(START_X, START_Y, this);
         downTime = DEFAULT_DOWNTIME;
+        checkLines();
         //printMap();
     }
 
