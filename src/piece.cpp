@@ -225,17 +225,22 @@ namespace TetraBlocks {
 
     //rotates the piece anticlockwise
     void Piece::setNextOrientation() {
-        bool placementSuccessful = false;
         Block * copy[PIECE_SIZE][PIECE_SIZE];
-        for(int i = 0; i < PIECE_SIZE; ++i) {
-            for(int j = 0; j < PIECE_SIZE; ++j)
-                if(ggrid->mayPlace(i, PIECE_SIZE-1-j)) {
+        int i, j;
+        for(i = 0; i < PIECE_SIZE; ++i) {
+            for(j = 0; j < PIECE_SIZE; ++j)
                     copy[PIECE_SIZE-1-j][i] = layout[i][j];
-                    placementSuccessful = true;
-                }
-                else
-                    placementSuccessful = false;
         }
+
+        bool placementSuccessful = true;
+
+        for(i = 0; i < PIECE_SIZE; ++i) {
+            for(j = 0; j < PIECE_SIZE; ++j)
+                    if(copy[i][j] != NULL)
+                        if(!ggrid->mayPlace(x+j, y+i))
+                            placementSuccessful = false;
+        }
+        std::cout<<"Placement was : "<<(placementSuccessful ? "true":"false")<<std::endl;
 
         if(!placementSuccessful)
             return;
