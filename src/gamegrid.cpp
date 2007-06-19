@@ -91,7 +91,6 @@ namespace TetraBlocks {
     }
 
     bool GameGrid::mayPlace(int x, int y) {
-        std::cout<<"Checking for placement at "<<x<<", "<<y<<". Status:"<<(grid[y][x] == NULL ? "empty" : "occupied")<<std::endl;
         return grid[y][x] == NULL;
     }
 
@@ -99,7 +98,7 @@ namespace TetraBlocks {
         currentPiece->releaseBlocksToGrid();
         currentPiece = Piece::createRandomPiece(START_X, START_Y, this);
         downTime = DEFAULT_DOWNTIME;
-        printMap();
+        //printMap();
     }
 
     void GameGrid::printMap() {

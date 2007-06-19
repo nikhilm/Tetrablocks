@@ -310,13 +310,11 @@ namespace TetraBlocks {
     }
 
     bool Piece::checkMovement(int dx, int dy) {
-        bool mayMove = false;
+        bool mayMove = true;
         for(int i = 0; i < PIECE_SIZE; ++i) {
             for(int j = 0; j < PIECE_SIZE; ++j) {
                 if(layout[i][j] != NULL) {
-                    if(ggrid->mayPlace(x+j+dx, y+i+dy))
-                        mayMove = true;
-                    else
+                    if(!ggrid->mayPlace(x+j+dx, y+i+dy))
                         mayMove = false;
                 }
             }
