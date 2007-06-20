@@ -131,9 +131,11 @@ namespace TetraBlocks {
 
     //move all lines above it one block down
     void GameGrid::clearLine(int line) {
-        for(int i = line-1; i >= 0; --i) {
+        for(int k = 0; k < GRID_WIDTH; ++k)
+            grid[line][k] = NULL;
+
+        for(int i = 0; i < line; ++i) {
             for(int j = 0; j < GRID_WIDTH; j++) {
-                grid[i+1][j] = NULL;
                 if(grid[i][j] != NULL) {
                     grid[i+1][j] = grid[i][j];
                     grid[i][j] = NULL;
