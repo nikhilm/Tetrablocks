@@ -37,6 +37,7 @@ namespace TetraBlocks {
     }
 
     void GameGrid::display(SDL_Surface * screen) { 
+        SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format, 0, 0, 0));
         drawGridOutline(screen);
         displayScore(50, 50, screen);
         nextPiece->display(50, 150, screen);
