@@ -18,17 +18,28 @@ namespace TetraBlocks {
                 grid[i][j] = NULL;
             }
         }
-        currentPiece = Piece::createRandomPiece(START_X, START_Y, this);
+        nextPiece = Piece::createRandomPiece(0, 0, this);
+        genNewPieces();
         moveDownTime = SDL_GetTicks();
         downTime = DEFAULT_DOWNTIME;
 
         gameRef = game;
+
+        score = 0;
+        level = 1;
         
         return true;
     }
 
+    void GameGrid::updateScore(int lines) {
+        int lineScores[4] = {10, 25, 75, 300};
+        score += (level + 1) * 10 * lineScores[lines-1];
+    }
+
     void GameGrid::display(SDL_Surface * screen) { 
         drawGridOutline(screen);
+        displayScore(50, 50, screen);
+        nextPiece->display(50, 150, screen);
         for(int i = 0; i < GRID_HEIGHT; ++i) {
             for(int j = 0; j < GRID_WIDTH; ++j) {
                 if(grid[i][j] != NULL)
@@ -60,7 +71,7 @@ namespace TetraBlocks {
         if(event.type == SDL_KEYDOWN) {
            switch(event.key.keysym.sym) {
                case SDLK_SPACE:
-                   currentPiece = Piece::createRandomPiece(START_X, START_Y, this);
+                   genNewPieces();
                    downTime = DEFAULT_DOWNTIME;
                    break;
                case SDLK_DOWN:
@@ -84,6 +95,10 @@ namespace TetraBlocks {
         r.h-=2;
         SDL_FillRect(screen, &r, SDL_MapRGB(screen->format, 0, 0, 0));
 
+    }
+
+    void GameGrid::displayScore(int offsetX, int offsetY, SDL_Surface *screen) {
+        //do score text rendering here
     }
 
     void GameGrid::checkLines() {
@@ -127,6 +142,8 @@ namespace TetraBlocks {
                 lineCount++;
             }
         }
+
+        updateScore(lineCount);
     }
 
     //move all lines above it one block down
@@ -157,7 +174,7 @@ namespace TetraBlocks {
 
     void GameGrid::lockPiece() {
         currentPiece->releaseBlocksToGrid();
-        currentPiece = Piece::createRandomPiece(START_X, START_Y, this);
+        genNewPieces();
         downTime = DEFAULT_DOWNTIME;
         checkLines();
         //printMap();

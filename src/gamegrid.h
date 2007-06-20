@@ -24,7 +24,7 @@ namespace TetraBlocks {
 
         void drawGridOutline(SDL_Surface * screen);
 
-        Piece * currentPiece;
+        Piece * currentPiece, * nextPiece;
 
         Uint32 moveDownTime;
 
@@ -32,6 +32,21 @@ namespace TetraBlocks {
         Uint32 downTime;
 
         const Game * gameRef;
+
+        //score related stuff
+        int score;
+        int level;
+        void updateScore(int);
+        void displayScore(int, int, SDL_Surface *);
+
+        void checkLevelUpdate();
+
+        void genNewPieces() {
+            currentPiece = nextPiece;
+            currentPiece->setX(START_X);
+            currentPiece->setY(START_Y);
+            nextPiece = Piece::createRandomPiece(0, 0, this);
+        };
 
         void printMap();
 
