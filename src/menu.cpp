@@ -12,7 +12,7 @@
 #include "menu.h"
 
 namespace NMUtils {
-    char * MenuItem::fontName = "../data/DejaVuSans.ttf";
+    char * MenuItem::fontName = "../data/Vera.ttf";
     TTF_Font * MenuItem::font = loadFont(MenuItem::fontName, 20);
     
     MenuItem::MenuItem(int x, int y, char * text, void (*callback)(SDL_Event &)) {
