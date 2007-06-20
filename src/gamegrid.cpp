@@ -116,16 +116,18 @@ namespace TetraBlocks {
                 
         }
 
-        for(int k = 0; k = topPosition
-
-
+        //for(int k = 0; k = topPosition
+    }
 
     void GameGrid::acceptBlock(int x, int y, Block * block) {
         grid[y][x] = block;
     }
 
     bool GameGrid::mayPlace(int x, int y) {
-        return grid[y][x] == NULL;
+        std::cout<<"x:"<<x<<" y:"<<y<<std::endl;
+        return x >= 0 && x < GRID_WIDTH &&
+               y >= 0 && y < GRID_HEIGHT &&
+               grid[y][x] == NULL;
     }
 
     void GameGrid::lockPiece() {

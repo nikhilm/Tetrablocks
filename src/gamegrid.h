@@ -35,6 +35,8 @@ namespace TetraBlocks {
 
         void printMap();
 
+        void checkLines();
+
 
     public:
         bool init(const Game *);
