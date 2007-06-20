@@ -36,6 +36,7 @@ namespace TetraBlocks {
         void printMap();
 
         void checkLines();
+        void clearLine(int);
 
 
     public:

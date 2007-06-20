@@ -92,9 +92,8 @@ namespace TetraBlocks {
         // downwards. then move all blocks above topmost position down by line count
         // if line completely empty then stop checking, since lines above it are empty too
         
-        int lineCount = 0;
-        int topPosition = GRID_HEIGHT - 1;
-
+        std::cout<<"Checking lines\n";
+        bool linesToClear[GRID_HEIGHT];
 
         for(int i = GRID_HEIGHT-1; i >= 0; --i) {
             bool lineFull = true;
@@ -106,17 +105,42 @@ namespace TetraBlocks {
                 if(grid[i][j] == NULL)
                     lineFull = false;
             }
+            
             if(lineFull) {
-                lineCount++;
-                topPosition = i;
+                std::cout<<"Line "<<i<<" was full\n";
+                linesToClear[i] = true;
+            }
+            else {
+                linesToClear[i] = false;
             }
 
-            if(lineTotallyEmpty)
+            if(lineTotallyEmpty) {
+                std::cout<<"Line "<<i<<" was empty, breaking out\n";
                 break;
-                
+            }
         }
 
-        //for(int k = 0; k = topPosition
+        int lineCount = 0;
+        for(int k = GRID_HEIGHT-1; k >= 0; k--) {
+            if(linesToClear[k] == true) {
+                clearLine(k);
+                lineCount++;
+            }
+        }
+    }
+
+    //move all lines above it one block down
+    void GameGrid::clearLine(int line) {
+        for(int i = line-1; i >= 0; --i) {
+            for(int j = 0; j < GRID_WIDTH; j++) {
+                grid[i+1][j] = NULL;
+                if(grid[i][j] != NULL) {
+                    grid[i+1][j] = grid[i][j];
+                    grid[i][j] = NULL;
+                }
+            }
+        }
+        std::cout<<"Cleared line "<<line<<std::endl;
     }
 
     void GameGrid::acceptBlock(int x, int y, Block * block) {
@@ -124,7 +148,6 @@ namespace TetraBlocks {
     }
 
     bool GameGrid::mayPlace(int x, int y) {
-        std::cout<<"x:"<<x<<" y:"<<y<<std::endl;
         return x >= 0 && x < GRID_WIDTH &&
                y >= 0 && y < GRID_HEIGHT &&
                grid[y][x] == NULL;
