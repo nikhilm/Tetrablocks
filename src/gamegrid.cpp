@@ -123,43 +123,55 @@ namespace TetraBlocks {
             }
             
             if(lineFull) {
-                std::cout<<"Line "<<i<<" was full\n";
                 linesToClear[i] = true;
+                clearLine(i);
             }
             else {
                 linesToClear[i] = false;
             }
 
             if(lineTotallyEmpty) {
-                std::cout<<"Line "<<i<<" was empty, breaking out\n";
                 break;
+            }
+
+            //now if a line has been emptied, move all blocks above it down one
+            for(int line = 0; line < GRID_HEIGHT; ++line) {
+                if(linesToClear[line] == true) {
+                    for(int i = line - 1; i >= 0; --i) {
+                        for(int j = 0; j < GRID_WIDTH; ++j) {
+                            if(grid[i][j] != NULL)
+                                grid[i+1][j] = grid[i][j];
+                            grid[i][j] = NULL;
+                        }
+                    }
+                }
             }
         }
 
         int lineCount = 0;
-        for(int k = GRID_HEIGHT-1; k >= 0; k--) {
-            if(linesToClear[k] == true) {
-                clearLine(k);
-                lineCount++;
-            }
-        }
+        //for(int k = GRID_HEIGHT-1; k >= 0; k--) {
+        //    if(linesToClear[k] == true) {
+        //        clearLine(k);
+        //        lineCount++;
+        //    }
+        //}
 
         updateScore(lineCount);
     }
 
-    //move all lines above it one block down
+    //set all blocks in line to null
     void GameGrid::clearLine(int line) {
         for(int k = 0; k < GRID_WIDTH; ++k)
             grid[line][k] = NULL;
 
-        for(int i = 0; i < line; ++i) {
+        /*for(int i = line-1; i >= 0; --i) {
             for(int j = 0; j < GRID_WIDTH; j++) {
                 if(grid[i][j] != NULL) {
                     grid[i+1][j] = grid[i][j];
                     grid[i][j] = NULL;
                 }
             }
-        }
+        }*/
         std::cout<<"Cleared line "<<line<<std::endl;
     }
 
