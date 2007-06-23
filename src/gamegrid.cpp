@@ -59,8 +59,8 @@ namespace TetraBlocks {
     void GameGrid::display(SDL_Surface * screen) { 
         SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format, 0, 0, 0));
         drawGridOutline(screen);
-        displayScore(470, 180, screen);
-        nextPiece->display(50, 150, screen);
+        displayScore(460, 190, screen);
+        nextPiece->display(50, 160, screen);
         for(int i = 0; i < GRID_HEIGHT; ++i) {
             for(int j = 0; j < GRID_WIDTH; ++j) {
                 if(grid[i][j] != NULL)
@@ -248,7 +248,7 @@ namespace TetraBlocks {
             std::cerr<<"Error initializing SDL_ttf library, cannot draw text. Error: "<<TTF_GetError()<<std::endl;
         }
 
-        scoreFont = TTF_OpenFont("../data/Vera.ttf", 20);
+        scoreFont = TTF_OpenFont("../data/Vera.ttf", 30);
         if(!scoreFont) {
             std::cerr<<"Error loading font file"<<TTF_GetError()<<"\n";
         }
