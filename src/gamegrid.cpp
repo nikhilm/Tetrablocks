@@ -8,8 +8,26 @@
 #include<iostream>
 
 #include<SDL/SDL_image.h>
+
 #include "game.h"
 #include "gamegrid.h"
+
+//convert integer to character string
+const char * itoa(int num) {
+    std::string str = "";
+    if(num == 0) return "0";
+    while(num > 0) {
+        str += ('0' + num%10);
+        num /= 10;
+    }
+
+    //reverse it
+    std::string rev = "";
+    for(int i = str.length()-1; i >= 0; --i)
+        rev += str[i];
+
+    return rev.c_str();
+}
 
 namespace TetraBlocks {
     bool GameGrid::init(const Game * game) {
@@ -28,6 +46,8 @@ namespace TetraBlocks {
         score = 0;
         level = 1;
         
+        setupSDLText();
+
         return true;
     }
 
@@ -99,7 +119,19 @@ namespace TetraBlocks {
     }
 
     void GameGrid::displayScore(int offsetX, int offsetY, SDL_Surface *screen) {
-        //do score text rendering here
+        SDL_Surface * textSurf;
+        SDL_Color col = {255, 0, 0};
+        if(!(textSurf = TTF_RenderText_Solid(scoreFont, itoa(score), col))) {
+            std::cerr<<TTF_GetError()<<std::endl;
+        }
+
+        SDL_Rect r;
+        r.x = offsetX;
+        r.y = offsetY;
+
+        SDL_BlitSurface(textSurf, NULL, screen, &r);
+
+        SDL_FreeSurface(textSurf);
     }
 
     void GameGrid::checkLines() {
@@ -207,6 +239,19 @@ namespace TetraBlocks {
             std::cout<<std::endl;
         }
         std::cout<<"-----------------\n";
+    }
+
+
+    void GameGrid::setupSDLText() {
+        //try loading SDL_ttf
+        if(!TTF_WasInit() && TTF_Init() == -1) {
+            std::cerr<<"Error initializing SDL_ttf library, cannot draw text. Error: "<<TTF_GetError()<<std::endl;
+        }
+
+        scoreFont = TTF_OpenFont("../data/Vera.ttf", 20);
+        if(!scoreFont) {
+            std::cerr<<"Error loading font file"<<TTF_GetError()<<"\n";
+        }
     }
 };
 

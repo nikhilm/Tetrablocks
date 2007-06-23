@@ -9,6 +9,8 @@
 #ifndef TB_GAMEGRID_H
 #define TB_GAMEGRID_H
 
+#include <SDL/SDL_ttf.h>
+
 #include "blocks.h"
 #include "piece.h"
 
@@ -33,6 +35,8 @@ namespace TetraBlocks {
 
         const Game * gameRef;
 
+        TTF_Font *scoreFont;
+
         //score related stuff
         int score;
         int level;
@@ -52,6 +56,8 @@ namespace TetraBlocks {
 
         void checkLines();
         void clearLine(int);
+
+        void setupSDLText();
 
 
     public:
