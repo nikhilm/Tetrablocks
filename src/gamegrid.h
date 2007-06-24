@@ -37,6 +37,8 @@ namespace TetraBlocks {
 
         TTF_Font *scoreFont;
 
+        bool gameOver;
+
         //score related stuff
         int score;
         int level;

@@ -45,6 +45,8 @@ namespace TetraBlocks {
 
         score = 0;
         level = 1;
+
+        gameOver = false;
         
         setupSDLText();
 
@@ -173,10 +175,16 @@ namespace TetraBlocks {
     }
 
     void GameGrid::lockPiece() {
-        currentPiece->releaseBlocksToGrid();
-        checkLines();
-        genNewPieces();
-        downTime = DEFAULT_DOWNTIME;
+        //if the currentPiece y position is too high up then game over
+        if(currentPiece->getY() <= 2) {
+            gameOver = true;
+        }
+        else {
+            currentPiece->releaseBlocksToGrid();
+            checkLines();
+            genNewPieces();
+            downTime = DEFAULT_DOWNTIME;
+        }
         //printMap();
     }
 
