@@ -71,6 +71,18 @@ namespace TetraBlocks {
             }
         }
         currentPiece->display(LEFT, TOP, screen);
+        if(gameOver) {
+            SDL_Color red = {255, 0, 0};
+            SDL_Surface * gameOverText = drawText("Game Over", red);
+
+            SDL_Rect r;
+            r.x = 213;
+            r.y = 75;
+
+            SDL_BlitSurface(gameOverText, NULL, screen, &r);
+
+            SDL_FreeSurface(gameOverText);
+        }
     }
 
     bool GameGrid::update() { 
@@ -90,6 +102,7 @@ namespace TetraBlocks {
         return true; 
     }
     void GameGrid::handle(SDL_Event &event) {
+        if(gameOver) return;
         currentPiece->handle(event);
         if(event.type == SDL_KEYDOWN) {
            switch(event.key.keysym.sym) {
