@@ -73,7 +73,6 @@ namespace TetraBlocks {
         // TODO: check piece position
         //for now just bottom
         if( currentPiece->bottomCollision() ) {
-            std::cout<<"Detected collision\n";
             lockPiece();
         }
 
@@ -134,77 +133,10 @@ namespace TetraBlocks {
     }
 
     void GameGrid::checkLines() {
-        //for each line, if all places are empty, increment line count
-        // also mark topmost position. remove all lines from there to line count
-        // downwards. then move all blocks above topmost position down by line count
-        // if line completely empty then stop checking, since lines above it are empty too
-        
-        std::cout<<"Checking lines\n";
-        bool linesToClear[GRID_HEIGHT];
-
-        for(int i = GRID_HEIGHT-1; i >= 0; --i) {
-            bool lineFull = true;
-            bool lineTotallyEmpty = true;
-            for(int j = 0; j < GRID_WIDTH; ++j) {
-                if(grid[i][j] != NULL)
-                    lineTotallyEmpty = false;
-                    
-                if(grid[i][j] == NULL)
-                    lineFull = false;
-            }
-            
-            if(lineFull) {
-                linesToClear[i] = true;
-                clearLine(i);
-            }
-            else {
-                linesToClear[i] = false;
-            }
-
-            if(lineTotallyEmpty) {
-                break;
-            }
-
-            //now if a line has been emptied, move all blocks above it down one
-            for(int line = 0; line < GRID_HEIGHT; ++line) {
-                if(linesToClear[line] == true) {
-                    for(int i = line - 1; i >= 0; --i) {
-                        for(int j = 0; j < GRID_WIDTH; ++j) {
-                            if(grid[i][j] != NULL)
-                                grid[i+1][j] = grid[i][j];
-                            grid[i][j] = NULL;
-                        }
-                    }
-                }
-            }
-        }
-
-        int lineCount = 0;
-        //for(int k = GRID_HEIGHT-1; k >= 0; k--) {
-        //    if(linesToClear[k] == true) {
-        //        clearLine(k);
-        //        lineCount++;
-        //    }
-        //}
-
-        updateScore(lineCount);
     }
 
     //set all blocks in line to null
-    void GameGrid::clearLine(int line) {
-        for(int k = 0; k < GRID_WIDTH; ++k)
-            grid[line][k] = NULL;
-
-        /*for(int i = line-1; i >= 0; --i) {
-            for(int j = 0; j < GRID_WIDTH; j++) {
-                if(grid[i][j] != NULL) {
-                    grid[i+1][j] = grid[i][j];
-                    grid[i][j] = NULL;
-                }
-            }
-        }*/
-        std::cout<<"Cleared line "<<line<<std::endl;
-    }
+    void GameGrid::clearLine(int line){}
 
     void GameGrid::acceptBlock(int x, int y, Block * block) {
         grid[y][x] = block;

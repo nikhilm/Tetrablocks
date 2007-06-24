@@ -66,12 +66,16 @@ namespace TetraBlocks {
     };
     
     Piece::Piece(int X, int Y, int shapeIndex, SDL_Surface * col, GameGrid * g) {
-        //for(int k = 0; k < NB_ROTATIONS; ++k)
-            for(int i = 0; i < PIECE_SIZE; ++i)
-                for(int j = 0; j < PIECE_SIZE; ++j) {
-                    if(Piece::SHAPES[shapeIndex][i][j] == 1)
-                        layout[i][j] = new Block(col);
+        for(int i = 0; i < PIECE_SIZE; ++i) {
+            for(int j = 0; j < PIECE_SIZE; ++j) {
+                if(Piece::SHAPES[shapeIndex][i][j] == 1) {
+                    layout[i][j] = new Block(col);
                 }
+                else {
+                    layout[i][j] = NULL;
+                }
+            }
+        }
         x = X;
         y = Y;
         ggrid = g;
@@ -103,15 +107,6 @@ namespace TetraBlocks {
                 layout[i][j] = copy[i][j];
         }
 
-        //currentOrientation = (currentOrientation + 1)%NB_ROTATIONS;
-        //for(int i = 0; i < PIECE_SIZE; ++i) {
-        //    for(int j = 0; j < PIECE_SIZE; ++j) {
-        //        layout[i][j] = NULL;
-        //        if(shapeMap[currentOrientation][i][j] == 1) {
-        //            layout[i][j] = new Block(colour);
-        //        }
-        //    }
-        //}
     }
     
     void Piece::moveDown() {
@@ -212,7 +207,6 @@ namespace TetraBlocks {
         for(int i = 0; i < PIECE_SIZE; ++i) {
             for(int j = 0; j < PIECE_SIZE; ++j) {
                 if(layout[i][j] != NULL) {
-                    //std::cout<<"Drawing block at logical coordinates ("<<x+j<<", "<<y+i<<")\n";
                     layout[i][j]->display(offsetX + (x+j)*Block::WIDTH, offsetY + (y+i)*Block::HEIGHT, screen);
                 }
             }
@@ -222,8 +216,10 @@ namespace TetraBlocks {
     void Piece::releaseBlocksToGrid() {
         for(int i = 0; i < PIECE_SIZE; ++i)
             for(int j = 0; j < PIECE_SIZE; ++j)
-                if(layout[i][j] != NULL)
+                if(layout[i][j] != NULL) {
                     ggrid->acceptBlock(x+j, y+i, layout[i][j]);
+                }
     }
+
 }
             
