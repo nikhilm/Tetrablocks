@@ -12,6 +12,7 @@
 #include<iostream>
 #include<string>
 #include<cstdlib>
+#include<ctime>
 
 #include<SDL/SDL_image.h>
 
@@ -26,6 +27,7 @@ namespace TetraBlocks {
             Block * layout[PIECE_SIZE][PIECE_SIZE];
 
             static  Piece * createRandomPiece(int x, int y, GameGrid *g) {
+                srand(time(0));
                 int index = rand()%NB_PIECES;
                 return new Piece(x, y, index, COLOURS[index], g);
             };
