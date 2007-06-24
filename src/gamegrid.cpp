@@ -57,6 +57,13 @@ namespace TetraBlocks {
     void GameGrid::updateScore(int lines) {
         int lineScores[4] = {10, 25, 75, 300};
         score += (level + 1) * 10 * lineScores[lines-1];
+
+        totalLinesCleared += lines;
+        if(totalLinesCleared >= 10) {
+            level++;
+            totalLinesCleared = 0;
+            downTime -= 20;
+        }
     }
 
     void GameGrid::display(SDL_Surface * screen) { 

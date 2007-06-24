@@ -19,7 +19,7 @@ namespace TetraBlocks {
     class Game;
     class GameGrid {
     public:
-        enum {TOP=50, LEFT = 200, GRID_WIDTH = 10, GRID_HEIGHT = 20, START_X=3, START_Y=0, DEFAULT_DOWNTIME=1000};
+        enum {TOP=50, LEFT = 200, GRID_WIDTH = 10, GRID_HEIGHT = 20, START_X=3, START_Y=0, DEFAULT_DOWNTIME=1000, LEVEL_CHANGE_LINES=10};
     private:
 
         Block * grid[GRID_HEIGHT][GRID_WIDTH];
@@ -38,6 +38,8 @@ namespace TetraBlocks {
         TTF_Font *scoreFont;
 
         bool gameOver;
+
+        int totalLinesCleared;
 
         //score related stuff
         int score;
