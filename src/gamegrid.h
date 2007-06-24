@@ -60,6 +60,7 @@ namespace TetraBlocks {
         void clearLine(int);
 
         void setupSDLText();
+        SDL_Surface * drawText(const char *, SDL_Color );
 
 
     public:

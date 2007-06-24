@@ -117,19 +117,16 @@ namespace TetraBlocks {
     }
 
     void GameGrid::displayScore(int offsetX, int offsetY, SDL_Surface *screen) {
-        SDL_Surface * textSurf;
-        SDL_Color col = {255, 0, 0};
-        if(!(textSurf = TTF_RenderText_Solid(scoreFont, itoa(score), col))) {
-            std::cerr<<TTF_GetError()<<std::endl;
-        }
+        SDL_Color red = {255, 0, 0};
+        SDL_Surface * scoreText = drawText(itoa(score), red);
 
         SDL_Rect r;
         r.x = offsetX;
         r.y = offsetY;
 
-        SDL_BlitSurface(textSurf, NULL, screen, &r);
+        SDL_BlitSurface(scoreText, NULL, screen, &r);
 
-        SDL_FreeSurface(textSurf);
+        SDL_FreeSurface(scoreText);
     }
 
     void GameGrid::checkLines() {
@@ -215,6 +212,14 @@ namespace TetraBlocks {
         if(!scoreFont) {
             std::cerr<<"Error loading font file"<<TTF_GetError()<<"\n";
         }
+    }
+
+    SDL_Surface * GameGrid::drawText(const char * text, SDL_Color col) {
+        SDL_Surface * textSurf;
+        if(!(textSurf = TTF_RenderText_Solid(scoreFont, text, col))) {
+            std::cerr<<TTF_GetError()<<std::endl;
+        }
+        return textSurf;
     }
 };
 
