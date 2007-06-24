@@ -167,11 +167,11 @@ namespace TetraBlocks {
     void GameGrid::clearLine(int line){
         for(int j = 0; j < GRID_WIDTH; ++j)
             grid[line][j] = NULL;
-        //for(int i = 0; i < line; ++i) {
-        //    for(int j = 0; j < GRID_WIDTH; ++j) {
-        //        grid[i+1][j] = grid[i][j];
-        //    }
-        //}
+        for(int i = line; i > 0; --i) {
+            for(int j = 0; j < GRID_WIDTH; ++j) {
+                grid[i][j] = grid[i-1][j];
+            }
+        }
     }
 
     void GameGrid::acceptBlock(int x, int y, Block * block) {
