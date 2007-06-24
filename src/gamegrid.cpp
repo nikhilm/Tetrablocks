@@ -48,6 +48,8 @@ namespace TetraBlocks {
         
         setupSDLText();
 
+        SDL_EnableKeyRepeat(SDL_DEFAULT_REPEAT_DELAY, SDL_DEFAULT_REPEAT_INTERVAL);
+
     }
 
     void GameGrid::updateScore(int lines) {
@@ -89,10 +91,6 @@ namespace TetraBlocks {
         currentPiece->handle(event);
         if(event.type == SDL_KEYDOWN) {
            switch(event.key.keysym.sym) {
-               case SDLK_SPACE:
-                   genNewPieces();
-                   downTime = DEFAULT_DOWNTIME;
-                   break;
                case SDLK_DOWN:
                    currentPiece->moveDown();
                    break;
