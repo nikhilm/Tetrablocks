@@ -54,6 +54,7 @@ namespace TetraBlocks {
             bool bottomCollision();
 
             void releaseBlocksToGrid();
+            int getBottomBound();
 
         private:
             GameGrid * ggrid;
@@ -81,7 +82,6 @@ namespace TetraBlocks {
             //bound related functions
             int getLeftBound();
             int getRightBound();
-            int getBottomBound();
 
             //moving functions
             void movePiece(int, int);

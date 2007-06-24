@@ -133,10 +133,33 @@ namespace TetraBlocks {
     }
 
     void GameGrid::checkLines() {
+        // check the 4 lines covered by the piece, if any is full move all lines above
+        // down 1 step
+        std::cout<<"Checking from ["<<currentPiece->getY()<<", "<<currentPiece->getBottomBound()<<"]\n";
+        for(int i = currentPiece->getY(); i <= currentPiece->getBottomBound(); ++i) {
+            bool lineFull = true;
+            for(int j = 0; j < GRID_WIDTH; ++j) {
+                if(grid[i][j] == NULL)
+                    lineFull = false;
+            }
+
+            if(lineFull) {
+                std::cout<<"Line "<<i<<" was full\n";
+                clearLine(i);
+            }
+        }
     }
 
-    //set all blocks in line to null
-    void GameGrid::clearLine(int line){}
+    //set all blocks in line to null and move above lines
+    void GameGrid::clearLine(int line){
+        for(int j = 0; j < GRID_WIDTH; ++j)
+            grid[line][j] = NULL;
+        //for(int i = 0; i < line; ++i) {
+        //    for(int j = 0; j < GRID_WIDTH; ++j) {
+        //        grid[i+1][j] = grid[i][j];
+        //    }
+        //}
+    }
 
     void GameGrid::acceptBlock(int x, int y, Block * block) {
         grid[y][x] = block;
@@ -150,9 +173,9 @@ namespace TetraBlocks {
 
     void GameGrid::lockPiece() {
         currentPiece->releaseBlocksToGrid();
+        checkLines();
         genNewPieces();
         downTime = DEFAULT_DOWNTIME;
-        checkLines();
         //printMap();
     }
 
