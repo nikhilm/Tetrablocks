@@ -30,7 +30,7 @@ const char * itoa(int num) {
 }
 
 namespace TetraBlocks {
-    bool GameGrid::init(const Game * game) {
+    GameGrid::GameGrid(const Game * game) {
         for(int i = 0; i < GRID_HEIGHT; ++i) {
             for(int j = 0; j < GRID_WIDTH; ++j) {
                 grid[i][j] = NULL;
@@ -48,7 +48,6 @@ namespace TetraBlocks {
         
         setupSDLText();
 
-        return true;
     }
 
     void GameGrid::updateScore(int lines) {

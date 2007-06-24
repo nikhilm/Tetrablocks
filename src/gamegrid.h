@@ -61,7 +61,7 @@ namespace TetraBlocks {
 
 
     public:
-        bool init(const Game *);
+        GameGrid(const Game *);
         void display(SDL_Surface * screen);
         bool update();
         void handle(SDL_Event &event);

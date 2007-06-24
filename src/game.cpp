@@ -39,8 +39,7 @@ namespace TetraBlocks {
     }
 
     void Game::startGame() {
-        GameGrid *grid = new GameGrid();
-        grid->init(this);
+        GameGrid *grid = new GameGrid(this);
 
         SDL_Event event;
         while(loopRunning)
