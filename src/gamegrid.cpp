@@ -135,7 +135,7 @@ namespace TetraBlocks {
     void GameGrid::checkLines() {
         // check the 4 lines covered by the piece, if any is full move all lines above
         // down 1 step
-        std::cout<<"Checking from ["<<currentPiece->getY()<<", "<<currentPiece->getBottomBound()<<"]\n";
+        int lineCount = 0;
         for(int i = currentPiece->getY(); i <= currentPiece->getBottomBound(); ++i) {
             bool lineFull = true;
             for(int j = 0; j < GRID_WIDTH; ++j) {
@@ -144,9 +144,12 @@ namespace TetraBlocks {
             }
 
             if(lineFull) {
-                std::cout<<"Line "<<i<<" was full\n";
+                lineCount++;
                 clearLine(i);
             }
+
+            if(lineCount > 0)
+                updateScore(lineCount);
         }
     }
 
