@@ -2,7 +2,7 @@ CC=g++
 CFLAGS=-g -Wall $(shell sdl-config --cflags)
 LDFLAGS=$(shell sdl-config --libs) -lSDL_image -lSDL_ttf
 INCLUDES=blocks.h piece.h game.h gamegrid.h
-SOURCES=piece.cpp gamegrid.cpp
+SOURCES=piece.cpp gamegrid.cpp game.cpp
 
 PROGRAMS=tetrablocks
 
