@@ -228,7 +228,7 @@ namespace TetraBlocks {
             std::cerr<<"Error initializing SDL_ttf library, cannot draw text. Error: "<<TTF_GetError()<<std::endl;
         }
 
-        scoreFont = TTF_OpenFont("../data/Vera.ttf", 30);
+        scoreFont = TTF_OpenFont("data/Vera.ttf", 30);
         if(!scoreFont) {
             std::cerr<<"Error loading font file"<<TTF_GetError()<<"\n";
         }
