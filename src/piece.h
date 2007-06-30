@@ -35,11 +35,19 @@ namespace TetraBlocks {
             // NOTE: Called only by colours array to load images
             // this should not be used.
             // instead use the cached surfaces stored in the array
-            static SDL_Surface * genImageSurface(char * colour) {
-                std::string path = "data/images/block_";
-                path += colour;
-                path += ".png";
-                return IMG_Load(path.c_str());
+            static SDL_Color genImageColour(int r, int g, int b) {
+                //std::string path = "data/images/block_";
+                //path += colour;
+                //path += ".png";
+                //return IMG_Load(path.c_str());
+
+                SDL_Color col;
+                
+                col.r = r;
+                col.g = g;
+                col.b = b;
+                return col;
+
             }
 
             void display(int, int, SDL_Surface * );
@@ -69,17 +77,16 @@ namespace TetraBlocks {
             static int SHAPES[NB_PIECES][PIECE_SIZE][PIECE_SIZE];
             
             
-            static SDL_Surface * COLOURS[NB_PIECES];
+            static SDL_Color COLOURS[NB_PIECES];
             
             
             int x, y;
 
-            SDL_Surface * colour;
             int shapeMap[NB_ROTATIONS][PIECE_SIZE][PIECE_SIZE];
 
             short currentOrientation;
             
-            Piece(int, int, int, SDL_Surface * , GameGrid *);
+            Piece(int, int, int, SDL_Color , GameGrid *);
 
             //bound related functions
             int getLeftBound();

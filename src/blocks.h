@@ -16,15 +16,12 @@
 namespace TetraBlocks {
     class Block {
     private:
-        SDL_Surface * image;
+        SDL_Color colour;
 
     public:
         enum {WIDTH = 20, HEIGHT = 20};
         
-        //NOTE: DO NOT call this, only used for init
-        Block() { image = NULL; }
-
-        Block(SDL_Surface * img) { image = img; };
+        Block(SDL_Color col) { colour = col; };
         /**
          * Draws the block.
          * offsetX and offsetY should be absolute coordinates.
@@ -34,7 +31,9 @@ namespace TetraBlocks {
             SDL_Rect r;
             r.x = offsetX;
             r.y = offsetY;
-            SDL_BlitSurface(image, NULL, screen, &r);
+            r.w = WIDTH-1;
+            r.h = HEIGHT-1;
+            SDL_FillRect(screen, &r, SDL_MapRGB(screen->format, colour.r, colour.g, colour.b));
         }
     };
 };

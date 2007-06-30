@@ -48,24 +48,24 @@ namespace TetraBlocks {
           {0, 0, 0, 0}}
      };
     
-     SDL_Surface * Piece::COLOURS[NB_PIECES] = {
+     SDL_Color Piece::COLOURS[NB_PIECES] = {
         // I = red
-        genImageSurface("red"),
+        genImageColour(255, 0, 0),
         // J = yellow
-        genImageSurface("yellow"),
+        genImageColour(255, 255, 0),
         // L = magenta
-        genImageSurface("magenta"),
+        genImageColour(255, 0, 255),
         // O = blue
-        genImageSurface("blue"),
+        genImageColour(0, 0, 255),
         // S = cyan
-        genImageSurface("cyan"),
+        genImageColour(0, 255, 255),
         // T = green
-        genImageSurface("green"),
+        genImageColour(0, 255, 0),
         // Z = orange
-        genImageSurface("orange")
+        genImageColour(255, 165, 0)
     };
     
-    Piece::Piece(int X, int Y, int shapeIndex, SDL_Surface * col, GameGrid * g) {
+    Piece::Piece(int X, int Y, int shapeIndex, SDL_Color col, GameGrid * g) {
         for(int i = 0; i < PIECE_SIZE; ++i) {
             for(int j = 0; j < PIECE_SIZE; ++j) {
                 if(Piece::SHAPES[shapeIndex][i][j] == 1) {
